@@ -40,7 +40,7 @@ public class HomeCommand extends DefaultCommand {
 
         player.sendMessage(messages.getComponent("commands.home.success", placeholders));
 
-        teleportService.teleport(player.getUniqueId(), location, null);
+        teleportService.teleport(player.getUniqueId(), location);
     }
 
     @Override

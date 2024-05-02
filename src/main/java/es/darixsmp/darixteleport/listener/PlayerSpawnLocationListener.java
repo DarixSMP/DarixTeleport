@@ -1,9 +1,12 @@
 package es.darixsmp.darixteleport.listener;
 
 import com.google.inject.Inject;
+import es.darixsmp.darixteleport.DarixTeleport;
 import es.darixsmp.darixteleportapi.pending.PendingTeleport;
 import es.darixsmp.darixteleportapi.pending.PendingTeleportService;
+import es.darixsmp.darixteleportapi.teleport.TeleportLocation;
 import es.darixsmp.darixteleportapi.teleport.TeleportService;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -15,6 +18,8 @@ public class PlayerSpawnLocationListener implements Listener {
     private PendingTeleportService pendingTeleportService;
     @Inject
     private TeleportService teleportService;
+    @Inject
+    private DarixTeleport plugin;
 
     @EventHandler
     public void onSpawn(PlayerSpawnLocationEvent event) {
@@ -22,7 +27,13 @@ public class PlayerSpawnLocationListener implements Listener {
         PendingTeleport pendingTeleport = pendingTeleportService.get(player.getUniqueId()).orElse(null);
         if (pendingTeleport == null) return;
 
-        pendingTeleportService.delete(player.getUniqueId());
-        teleportService.teleport(player.getUniqueId(), pendingTeleport.getTarget(), event);
+        TeleportLocation teleportLocation = pendingTeleport.getTarget();
+        if (teleportLocation.getServer().equals(DarixTeleport.CURRENT_SERVER)) {
+            event.setSpawnLocation(teleportLocation.toLocation());
+        } else {
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, () ->
+                    teleportService.teleport(player.getUniqueId(), teleportLocation)
+            );
+        }
     }
 }

@@ -5,6 +5,7 @@ import com.google.common.io.ByteStreams;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import es.darixsmp.darixteleport.DarixTeleport;
+import es.darixsmp.darixteleport.messenger.DefaultRedisMessenger;
 import es.darixsmp.darixteleport.messenger.message.GetTeleportLocationRequest;
 import es.darixsmp.darixteleport.messenger.message.GetTeleportLocationResponse;
 import es.darixsmp.darixteleport.messenger.message.TeleportPlayerMessage;
@@ -37,7 +38,7 @@ public class DefaultTeleportService implements TeleportService {
     private Configuration config;
 
     @Override
-    public void teleport(UUID playerUUID, TeleportLocation teleportLocation, PlayerSpawnLocationEvent event) {
+    public void teleport(UUID playerUUID, TeleportLocation teleportLocation) {
         Player player = Bukkit.getPlayer(playerUUID);
         if (player == null || !player.isOnline()) {
             TeleportPlayerMessage message = new TeleportPlayerMessage(playerUUID, teleportLocation);
@@ -46,12 +47,7 @@ public class DefaultTeleportService implements TeleportService {
         }
 
         if (teleportLocation.getServer().equals(DarixTeleport.CURRENT_SERVER)) {
-            if (event == null) {
-                player.teleportAsync(teleportLocation.toLocation());
-            } else {
-                event.setSpawnLocation(teleportLocation.toLocation());
-            }
-
+            player.teleportAsync(teleportLocation.toLocation());
             return;
         }
 
