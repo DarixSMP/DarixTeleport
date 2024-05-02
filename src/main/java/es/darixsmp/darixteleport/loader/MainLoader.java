@@ -9,6 +9,7 @@ import es.darixsmp.darixteleportapi.user.User;
 import es.darixsmp.darixteleportapi.user.UserService;
 import es.darixsmp.darixteleportapi.warp.WarpService;
 import net.smoothplugins.smoothbase.configuration.Configuration;
+import net.smoothplugins.smoothbase.messenger.Messenger;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 
@@ -27,6 +28,8 @@ public class MainLoader {
     private Configuration config;
     @Inject
     private DarixTeleport plugin;
+    @Inject
+    private Messenger messenger;
 
     public void load() {
         commandLoader.load();
@@ -35,6 +38,7 @@ public class MainLoader {
         warpService.loadWarpsToCache();
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
+        messenger.register();
     }
 
     public void unload() {
@@ -47,5 +51,7 @@ public class MainLoader {
             userService.update(user, Destination.DATABASE, Destination.CACHE_IF_PRESENT);
             userService.setTTLOfCacheByUUID(user.getUuid(), config.getInt("timeouts.user-quit") / 1000);
         });
+
+        messenger.unregister();
     }
 }
