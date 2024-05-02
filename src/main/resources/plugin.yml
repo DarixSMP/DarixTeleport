@@ -1,0 +1,4 @@
+name: DarixTeleport
+version: '${project.version}'
+main: es.darixsmp.darixteleport.DarixTeleport
+api-version: '1.20'
