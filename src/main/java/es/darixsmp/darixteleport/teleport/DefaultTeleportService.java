@@ -18,6 +18,7 @@ import net.smoothplugins.smoothbase.messenger.Response;
 import net.smoothplugins.smoothbase.serializer.Serializer;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.spigotmc.event.player.PlayerSpawnLocationEvent;
 
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -36,7 +37,7 @@ public class DefaultTeleportService implements TeleportService {
     private Configuration config;
 
     @Override
-    public void teleport(UUID playerUUID, TeleportLocation teleportLocation) {
+    public void teleport(UUID playerUUID, TeleportLocation teleportLocation, PlayerSpawnLocationEvent event) {
         Player player = Bukkit.getPlayer(playerUUID);
         if (player == null || !player.isOnline()) {
             TeleportPlayerMessage message = new TeleportPlayerMessage(playerUUID, teleportLocation);
@@ -45,7 +46,12 @@ public class DefaultTeleportService implements TeleportService {
         }
 
         if (teleportLocation.getServer().equals(DarixTeleport.CURRENT_SERVER)) {
-            player.teleportAsync(teleportLocation.toLocation());
+            if (event == null) {
+                player.teleportAsync(teleportLocation.toLocation());
+            } else {
+                event.setSpawnLocation(teleportLocation.toLocation());
+            }
+
             return;
         }
 

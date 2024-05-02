@@ -46,7 +46,7 @@ public class DefaultMessageConsumer implements MessageConsumer {
         Player player = Bukkit.getPlayer(message.getPlayerUUID());
         if (player == null) return;
 
-        teleportService.teleport(message.getPlayerUUID(), message.getTarget());
+        teleportService.teleport(message.getPlayerUUID(), message.getTarget(), null);
     }
 
     private void consumeGetTeleportLocationRequest(GetTeleportLocationRequest message, UUID identifier) {
