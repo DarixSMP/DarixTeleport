@@ -1,0 +1,8 @@
+redis:
+  host: db.darixsmp.es
+  port: 6379
+  password: ""
+  cluster: "SURVIVAL_DarixTeleport"
+mongo:
+  uri: "mongodb://db.darixsmp.es:27017"
+  database: "SURVIVAL_DarixTeleport"
