@@ -14,12 +14,15 @@ import org.bukkit.plugin.java.JavaPlugin;
 public final class DarixTeleport extends JavaPlugin {
 
     private static Injector injector;
+    public static String CURRENT_SERVER;
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         Configuration config = new Configuration(this, "config");
         Configuration messages = new Configuration(this, "messages");
+
+        CURRENT_SERVER = config.getString("server");
 
         String uri = config.getString("mongo.uri");
         String databaseName = config.getString("mongo.database");

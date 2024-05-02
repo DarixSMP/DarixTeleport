@@ -6,3 +6,5 @@ redis:
 mongo:
   uri: "mongodb://db.darixsmp.es:27017"
   database: "SURVIVAL_DarixTeleport"
+
+server: "SURVIVAL-S-01"
