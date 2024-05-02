@@ -1,0 +1,19 @@
+notifications:
+  countdown:
+    chat:
+      enabled: true
+      content:
+        - "&a&lTP &8» &fEl teletransporte iniciará en &d%time%&f, no te muevas."
+    actionbar:
+      enabled: true
+      content: "&a&lTP &8» &fEl teletransporte iniciará en &d%time%&f, no te muevas."
+    title:
+      enabled: false
+      title: "&cTitle"
+      subtitle: "&dSubtitle"
+      fadeIn: 0.5
+      stay: 2
+      fadeOut: 0.5
+    sound:
+      enabled: false
+      content: "ENTITY_PUFFER_FISH_BLOW_UP"
