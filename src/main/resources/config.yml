@@ -8,3 +8,6 @@ mongo:
   database: "SURVIVAL_DarixTeleport"
 
 server: "SURVIVAL-S-01"
+
+timeouts: # In milliseconds
+  get-teleport-location-request: 3000
