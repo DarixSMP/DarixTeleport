@@ -4,13 +4,13 @@ import es.darixsmp.darixteleportapi.teleport.TeleportLocation;
 
 import java.util.UUID;
 
-public class TeleportRequestMessage extends DefaultMessage {
+public class TeleportPlayerMessage extends DefaultMessage {
 
     private final UUID playerUUID;
     private final TeleportLocation target;
 
-    public TeleportRequestMessage(UUID playerUUID, TeleportLocation target) {
-        super(DefaultMessageType.TELEPORT_REQUEST);
+    public TeleportPlayerMessage(UUID playerUUID, TeleportLocation target) {
+        super(DefaultMessageType.TELEPORT_PLAYER);
         this.playerUUID = playerUUID;
         this.target = target;
     }
