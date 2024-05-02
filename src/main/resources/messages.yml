@@ -1,3 +1,8 @@
+global:
+  not-a-player: "&c&lERROR &8» &fDebes ser un jugador para hacer eso."
+  no-permission: "&c&lERROR &8» &fNo tienes permiso."
+  wrong-usage: "&c&lERROR &8» &fUso: &7%usage%&f."
+
 notifications:
   countdown:
     chat:
