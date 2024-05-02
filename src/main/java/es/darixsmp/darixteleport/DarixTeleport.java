@@ -38,7 +38,7 @@ public final class DarixTeleport extends JavaPlugin {
                 new StorageModule(),
                 new SerializerModule(),
                 new MessengerModule(),
-                new UserModule()
+                new ServiceModule()
         );
     }
 
