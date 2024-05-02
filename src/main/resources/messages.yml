@@ -3,6 +3,10 @@ global:
   no-permission: "&c&lERROR &8» &fNo tienes permiso."
   wrong-usage: "&c&lERROR &8» &fUso: &7%usage%&f."
 
+commands:
+  sethome:
+    success: "&e&lHOMES &8» &fHas establecido un nuevo home llamado &a%home%&f."
+
 notifications:
   countdown:
     chat:

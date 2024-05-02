@@ -10,8 +10,7 @@ import java.util.HashMap;
 
 public abstract class DefaultCommand extends Command {
 
-    @Inject
-    @Named("messages")
+    @Inject @Named("messages")
     private Configuration messages;
 
     @Override
