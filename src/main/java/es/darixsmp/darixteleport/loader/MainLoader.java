@@ -25,12 +25,16 @@ public class MainLoader {
     private UserService userService;
     @Inject @Named("config")
     private Configuration config;
+    @Inject
+    private DarixTeleport plugin;
 
     public void load() {
         commandLoader.load();
         listenerLoader.load();
 
         warpService.loadWarpsToCache();
+
+        Bukkit.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
     }
 
     public void unload() {
