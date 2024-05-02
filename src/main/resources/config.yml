@@ -11,3 +11,4 @@ server: "SURVIVAL-S-01"
 
 timeouts: # In milliseconds
   get-teleport-location-request: 3000
+  pending-teleport-ttl: 10000

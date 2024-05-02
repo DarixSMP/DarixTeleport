@@ -4,8 +4,10 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import es.darixsmp.darixteleportapi.pending.PendingTeleport;
 import es.darixsmp.darixteleportapi.pending.PendingTeleportService;
+import net.smoothplugins.smoothbase.configuration.Configuration;
 import net.smoothplugins.smoothbase.serializer.Serializer;
 import net.smoothplugins.smoothbase.storage.RedisStorage;
+import org.checkerframework.checker.units.qual.N;
 
 import java.util.Optional;
 import java.util.UUID;
@@ -16,6 +18,8 @@ public class DefaultPendingTeleportService implements PendingTeleportService {
     private RedisStorage redisStorage;
     @Inject
     private Serializer serializer;
+    @Inject @Named("config")
+    private Configuration config;
 
     @Override
     public Optional<PendingTeleport> get(UUID uuid) {
@@ -24,7 +28,8 @@ public class DefaultPendingTeleportService implements PendingTeleportService {
 
     @Override
     public void create(PendingTeleport pendingTeleport) {
-        redisStorage.create(pendingTeleport.getUserUUID().toString(), serializer.serialize(pendingTeleport));
+        redisStorage.createWithTTL(pendingTeleport.getUserUUID().toString(),
+                serializer.serialize(pendingTeleport), config.getInt("timeouts.pending-teleport-ttl") / 1000);
     }
 
     @Override
