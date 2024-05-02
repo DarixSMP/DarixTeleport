@@ -77,6 +77,8 @@ public class DefaultWarpService implements WarpService {
     public void loadWarpsToCache() {
         mongoStorage.getAllValues().forEach(warpJSON -> {
             Warp warp = serializer.deserialize(warpJSON, Warp.class);
+            if (redisStorage.contains(warp.getName())) return;
+
             redisStorage.create(warp.getName(), warpJSON);
         });
     }

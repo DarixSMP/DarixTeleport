@@ -2,6 +2,7 @@ package es.darixsmp.darixteleport;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import es.darixsmp.darixteleport.loader.MainLoader;
 import es.darixsmp.darixteleport.module.*;
 import net.smoothplugins.smoothbase.configuration.Configuration;
 import net.smoothplugins.smoothbase.connection.MongoConnection;
@@ -43,11 +44,14 @@ public final class DarixTeleport extends JavaPlugin {
                 new MessengerModule(),
                 new ServiceModule()
         );
+
+        injector.getInstance(MainLoader.class).load();
     }
 
     @Override
     public void onDisable() {
         // Plugin shutdown logic
+        injector.getInstance(MainLoader.class).unload();
     }
 
     public static Injector getInjector() {
