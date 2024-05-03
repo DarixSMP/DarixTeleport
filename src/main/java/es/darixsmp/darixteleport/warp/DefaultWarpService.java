@@ -30,6 +30,7 @@ public class DefaultWarpService implements WarpService {
     @Override
     public void create(Warp warp) {
         mongoStorage.create(serializer.serialize(warp));
+        redisStorage.create(warp.getName(), serializer.serialize(warp));
     }
 
     @Override

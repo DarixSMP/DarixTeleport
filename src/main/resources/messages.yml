@@ -19,6 +19,9 @@ commands:
     success: "&e&lHOMES &8» &fTeletransportado al home de &a%player% &fllamado &a%home%&f."
   setwarp:
     success: "&e&lWARPS &8» &fHas establecido un nuevo warp llamado &a%warp%&f."
+  delwarp:
+    not-found: "&c&lERROR &8» &fNo se ha encontrado el warp &c%warp%&f."
+    success: "&e&lWARPS &8» &fHas eliminado el warp &a%warp% &fen el server &a%server%&f."
 
 notifications:
   countdown:

@@ -64,6 +64,7 @@ public class SetWarpCommand extends DefaultCommand {
         TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
         Warp warp = warpService.get(name).orElseGet(() -> new Warp(name));
         warp.addLocation(currentLocation);
+        warpService.create(warp);
 
         HashMap<String, String> placeholders = new HashMap<>();
         placeholders.put("%warp%", name);

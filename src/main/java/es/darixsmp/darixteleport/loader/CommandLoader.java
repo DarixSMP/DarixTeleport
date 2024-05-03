@@ -6,6 +6,7 @@ import es.darixsmp.darixteleport.command.home.DelHomeCommand;
 import es.darixsmp.darixteleport.command.home.HomeCommand;
 import es.darixsmp.darixteleport.command.home.PHomeCommand;
 import es.darixsmp.darixteleport.command.home.SetHomeCommand;
+import es.darixsmp.darixteleport.command.warp.DelWarpCommand;
 import es.darixsmp.darixteleport.command.warp.SetWarpCommand;
 
 public class CommandLoader {
@@ -23,6 +24,8 @@ public class CommandLoader {
     private PHomeCommand pHomeCommand;
     @Inject
     private SetWarpCommand setWarpCommand;
+    @Inject
+    private DelWarpCommand delWarpCommand;
 
     public void load() {
         setHomeCommand.registerCommand(plugin);
@@ -30,5 +33,6 @@ public class CommandLoader {
         delHomeCommand.registerCommand(plugin);
         pHomeCommand.registerCommand(plugin);
         setHomeCommand.registerCommand(plugin);
+        setWarpCommand.registerCommand(plugin);
     }
 }
