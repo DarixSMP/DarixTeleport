@@ -21,7 +21,7 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.List;
 
-public class TPACommand extends DefaultCommand {
+public class TPAHereCommand extends DefaultCommand {
 
     @Inject
     private UserService userService;
@@ -40,7 +40,7 @@ public class TPACommand extends DefaultCommand {
 
     @Override
     public String getName() {
-        return "tpa";
+        return "tpahere";
     }
 
     @Override
@@ -50,7 +50,7 @@ public class TPACommand extends DefaultCommand {
 
     @Override
     public String getPermission() {
-        return "darixteleport.command.tpa";
+        return "darixteleport.command.tpahere";
     }
 
     @Override
@@ -60,7 +60,7 @@ public class TPACommand extends DefaultCommand {
 
     @Override
     public String getUsage() {
-        return "/tpa <player>";
+        return "/tpahere <player>";
     }
 
     @Override
@@ -90,16 +90,16 @@ public class TPACommand extends DefaultCommand {
             target.setLastTPARequestPlayer(player.getUniqueId());
             userService.update(target, Destination.CACHE_IF_PRESENT);
 
-            Request request = new Request(player.getUniqueId(), target.getUuid(), RequestType.TPA);
+            Request request = new Request(player.getUniqueId(), target.getUuid(), RequestType.TPA_HERE);
             requestService.create(request);
 
             HashMap<String, String> placeholders = new HashMap<>();
             placeholders.put("%target%", targetName);
             placeholders.put("%player%", player.getName());
 
-            player.sendMessage(messages.getComponent("commands.tpa.success", placeholders));
+            player.sendMessage(messages.getComponent("commands.tpahere.success", placeholders));
 
-            List<String> targetMessages = messages.getStringList("commands.tpa.success-target", placeholders);
+            List<String> targetMessages = messages.getStringList("commands.tpahere.success-target", placeholders);
             PlayerMessage targetMessage = new PlayerMessage(target.getUuid(), targetMessages);
             messenger.send(serializer.serialize(targetMessage));
         });

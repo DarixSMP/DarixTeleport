@@ -41,7 +41,16 @@ commands:
       success: "&e&lTP &8» &fTeletransportado a &a%coords%&f."
     player:
       success: "&e&lTP &8» &fTeletransportado a &a%player%&f."
-
+  tpa:
+    success: "&e&lTP &8» &fHas enviado una solicitud de teletransporte a &a%target%&f."
+    success-target:
+      - "&e&lTP &8» &fHas recibido una solicitud de teletransporte de &a%player%&f,"
+      - "<white>para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept>CLIC AQUÍ</click></b><white>.<reset>"
+  tpahere:
+    success: "&e&lTP &8» &fHas enviado una solicitud de teletransporte a tu ubicación a &a%target%&f."
+    success-target:
+      - "&e&lTP &8» &fHas recibido una solicitud de teletransporte a SU ubicación de &a%player%&f,"
+      - "<white>para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept>CLIC AQUÍ</click></b><white>.<reset>"
 
 notifications:
   countdown:
