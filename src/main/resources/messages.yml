@@ -10,6 +10,8 @@ commands:
   home:
     not-found: "&c&lERROR &8» &fNo tienes un home llamado &c%home%&f."
     success: "&e&lHOMES &8» &fTeletransportado a tu home &a%home%&f."
+  delhome:
+    success: "&e&lHOMES &8» &fHas eliminado tu home &a%home%&f."
 
 notifications:
   countdown:
