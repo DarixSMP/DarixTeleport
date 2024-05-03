@@ -32,6 +32,9 @@ commands:
     success: "&e&lBACK &8» &fTeletransportado a tu última ubicación."
   tpo:
     success: "&e&lTP &8» &fTeletransportado a la última ubicación de &a%player%&f."
+  tphere:
+    success: "&e&lTP &8» &fTeletransportado a &a%target% &fa tu ubicación."
+    success-target: "&e&lTP &8» &fTeletransportado a la ubicación de &a%player%&f."
 
 notifications:
   countdown:

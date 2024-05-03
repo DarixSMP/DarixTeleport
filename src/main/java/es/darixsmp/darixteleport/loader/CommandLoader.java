@@ -8,7 +8,8 @@ import es.darixsmp.darixteleport.command.home.HomeCommand;
 import es.darixsmp.darixteleport.command.home.PHomeCommand;
 import es.darixsmp.darixteleport.command.home.SetHomeCommand;
 import es.darixsmp.darixteleport.command.spawn.SpawnCommand;
-import es.darixsmp.darixteleport.command.tp.TPOfflineCommand;
+import es.darixsmp.darixteleport.command.tp.TPHereCommand;
+import es.darixsmp.darixteleport.command.tp.TPOCommand;
 import es.darixsmp.darixteleport.command.warp.DelWarpCommand;
 import es.darixsmp.darixteleport.command.warp.SetWarpCommand;
 import es.darixsmp.darixteleport.command.warp.WarpCommand;
@@ -37,7 +38,9 @@ public class CommandLoader {
     @Inject
     private BackCommand backCommand;
     @Inject
-    private TPOfflineCommand tpoOfflineCommand;
+    private TPOCommand tpoOfflineCommand;
+    @Inject
+    private TPHereCommand tpHereCommand;
 
     public void load() {
         setHomeCommand.registerCommand(plugin);
@@ -51,5 +54,6 @@ public class CommandLoader {
         spawnCommand.registerCommand(plugin);
         backCommand.registerCommand(plugin);
         tpoOfflineCommand.registerCommand(plugin);
+        tpHereCommand.registerCommand(plugin);
     }
 }
