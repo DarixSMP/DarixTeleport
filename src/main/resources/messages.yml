@@ -35,6 +35,13 @@ commands:
   tphere:
     success: "&e&lTP &8» &fTeletransportado a &a%target% &fa tu ubicación."
     success-target: "&e&lTP &8» &fTeletransportado a la ubicación de &a%player%&f."
+  tp:
+    coords:
+      invalid-coords: "&c&lERROR &8» &fLas coordenadas son inválidas."
+      success: "&e&lTP &8» &fTeletransportado a &a%coords%&f."
+    player:
+      success: "&e&lTP &8» &fTeletransportado a &a%player%&f."
+
 
 notifications:
   countdown:

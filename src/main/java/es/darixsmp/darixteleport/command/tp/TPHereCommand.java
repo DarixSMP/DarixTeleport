@@ -5,7 +5,6 @@ import com.google.inject.name.Named;
 import es.darixsmp.darixteleport.DarixTeleport;
 import es.darixsmp.darixteleport.command.DefaultCommand;
 import es.darixsmp.darixteleport.messenger.message.PlayerMessage;
-import es.darixsmp.darixteleportapi.countdown.CountdownCallback;
 import es.darixsmp.darixteleportapi.countdown.CountdownService;
 import es.darixsmp.darixteleportapi.service.Destination;
 import es.darixsmp.darixteleportapi.teleport.TeleportLocation;
