@@ -1,4 +1,4 @@
-package es.darixsmp.darixteleport.command.spawn;
+package es.darixsmp.darixteleport.command.back;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -12,7 +12,6 @@ import es.darixsmp.darixteleportapi.teleport.TeleportService;
 import es.darixsmp.darixteleportapi.user.User;
 import es.darixsmp.darixteleportapi.user.UserService;
 import es.darixsmp.darixteleportapi.warp.Warp;
-import es.darixsmp.darixteleportapi.warp.WarpService;
 import net.smoothplugins.smoothbase.configuration.Configuration;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -20,7 +19,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public class SpawnCommand extends DefaultCommand {
+public class BackCommand extends DefaultCommand {
 
     @Inject
     private UserService userService;
@@ -34,12 +33,10 @@ public class SpawnCommand extends DefaultCommand {
     private Configuration config;
     @Inject
     private DarixTeleport plugin;
-    @Inject
-    private WarpService warpService;
 
     @Override
     public String getName() {
-        return "spawn";
+        return "back";
     }
 
     @Override
@@ -49,7 +46,7 @@ public class SpawnCommand extends DefaultCommand {
 
     @Override
     public String getPermission() {
-        return "darixteleport.command.spawn";
+        return "darixteleport.command.back";
     }
 
     @Override
@@ -59,7 +56,7 @@ public class SpawnCommand extends DefaultCommand {
 
     @Override
     public String getUsage() {
-        return "/spawn";
+        return "/back";
     }
 
     @Override
@@ -75,20 +72,10 @@ public class SpawnCommand extends DefaultCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            String warpName = "spawn";
             Player player = (Player) sender;
 
-            Warp warp = warpService.get(warpName).orElse(null);
-            if (warp == null) {
-                player.sendMessage(messages.getComponent("commands.spawn.not-found"));
-                return;
-            }
-
-            TeleportLocation spawnLocation = warp.getLocation(DarixTeleport.CURRENT_SERVER);
-            if (spawnLocation == null) {
-                player.sendMessage(messages.getComponent("commands.spawn.not-found"));
-                return;
-            }
+            User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
+            TeleportLocation lastLocation = user.getLastLocation();
 
             int countdownDuration = config.getInt("countdown.duration");
             double maxMovement = config.getDouble("countdown.max-movement");
@@ -96,12 +83,12 @@ public class SpawnCommand extends DefaultCommand {
                 @Override
                 public void onSuccess() {
                     TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
-                    User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
-                    user.setLastLocation(currentLocation);
-                    userService.update(user, Destination.CACHE_IF_PRESENT);
+                    User updatedUser = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
+                    updatedUser.setLastLocation(currentLocation);
+                    userService.update(updatedUser, Destination.CACHE_IF_PRESENT);
 
-                    player.sendMessage(messages.getComponent("commands.spawn.success"));
-                    teleportService.teleport(player.getUniqueId(), spawnLocation);
+                    player.sendMessage(messages.getComponent("commands.back.success"));
+                    teleportService.teleport(player.getUniqueId(), lastLocation);
                 }
 
                 @Override

@@ -28,6 +28,8 @@ commands:
   spawn:
     not-found: "&c&lERROR &8» &fNo se ha encontrado el spawn."
     success: "&e&lSPAWN &8» &fTeletransportado al spawn."
+  back:
+    success: "&e&lBACK &8» &fTeletransportado a tu última ubicación."
 
 notifications:
   countdown:

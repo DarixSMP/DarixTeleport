@@ -2,6 +2,7 @@ package es.darixsmp.darixteleport.loader;
 
 import com.google.inject.Inject;
 import es.darixsmp.darixteleport.DarixTeleport;
+import es.darixsmp.darixteleport.command.back.BackCommand;
 import es.darixsmp.darixteleport.command.home.DelHomeCommand;
 import es.darixsmp.darixteleport.command.home.HomeCommand;
 import es.darixsmp.darixteleport.command.home.PHomeCommand;
@@ -32,6 +33,8 @@ public class CommandLoader {
     private WarpCommand warpCommand;
     @Inject
     private SpawnCommand spawnCommand;
+    @Inject
+    private BackCommand backCommand;
 
     public void load() {
         setHomeCommand.registerCommand(plugin);
@@ -43,5 +46,6 @@ public class CommandLoader {
         delWarpCommand.registerCommand(plugin);
         warpCommand.registerCommand(plugin);
         spawnCommand.registerCommand(plugin);
+        backCommand.registerCommand(plugin);
     }
 }

@@ -93,8 +93,9 @@ public class HomeCommand extends DefaultCommand {
                 @Override
                 public void onSuccess() {
                     TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
-                    user.setLastLocation(currentLocation);
-                    userService.update(user, Destination.CACHE_IF_PRESENT);
+                    User updatedUser = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
+                    updatedUser.setLastLocation(currentLocation);
+                    userService.update(updatedUser, Destination.CACHE_IF_PRESENT);
 
                     player.sendMessage(messages.getComponent("commands.home.success", placeholders));
                     teleportService.teleport(player.getUniqueId(), home);
