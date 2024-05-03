@@ -86,24 +86,14 @@ public class TPOCommand extends DefaultCommand {
 
             TeleportLocation lastLocation = target.getLastLocation();
 
-            int countdownDuration = config.getInt("countdown.duration");
-            double maxMovement = config.getDouble("countdown.max-movement");
-            countdownService.startCountdown(player, countdownDuration, maxMovement, new CountdownCallback() {
-                @Override
-                public void onSuccess() {
-                    TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
-                    User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
-                    user.setLastLocation(currentLocation);
-                    userService.update(target, Destination.CACHE_IF_PRESENT);
+            countdownService.startCountdown(player, () -> {
+                TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
+                User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
+                user.setLastLocation(currentLocation);
+                userService.update(target, Destination.CACHE_IF_PRESENT);
 
-                    player.sendMessage(messages.getComponent("commands.tpo.success", placeholders));
-                    teleportService.teleport(player.getUniqueId(), lastLocation);
-                }
-
-                @Override
-                public void onFail() {
-                    player.sendMessage(messages.getComponent("global.countdown-cancelled"));
-                }
+                player.sendMessage(messages.getComponent("commands.tpo.success", placeholders));
+                teleportService.teleport(player.getUniqueId(), lastLocation);
             });
         });
     }

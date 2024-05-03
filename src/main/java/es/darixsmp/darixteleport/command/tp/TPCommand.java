@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import es.darixsmp.darixteleport.DarixTeleport;
 import es.darixsmp.darixteleport.command.DefaultCommand;
-import es.darixsmp.darixteleport.messenger.message.PlayerMessage;
 import es.darixsmp.darixteleportapi.countdown.CountdownCallback;
 import es.darixsmp.darixteleportapi.countdown.CountdownService;
 import es.darixsmp.darixteleportapi.service.Destination;
@@ -13,8 +12,6 @@ import es.darixsmp.darixteleportapi.teleport.TeleportService;
 import es.darixsmp.darixteleportapi.user.User;
 import es.darixsmp.darixteleportapi.user.UserService;
 import net.smoothplugins.smoothbase.configuration.Configuration;
-import net.smoothplugins.smoothbase.messenger.Messenger;
-import net.smoothplugins.smoothbase.serializer.Serializer;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -101,24 +98,14 @@ public class TPCommand extends DefaultCommand {
                 placeholders.put("%coords%", x + ", " + y + ", " + z);
 
                 TeleportLocation location = new TeleportLocation(DarixTeleport.CURRENT_SERVER, player.getWorld().getUID(), x, y, z, 0, 0);
-                int countdownDuration = config.getInt("countdown.duration");
-                double maxMovement = config.getDouble("countdown.max-movement");
-                countdownService.startCountdown(player, countdownDuration, maxMovement, new CountdownCallback() {
-                    @Override
-                    public void onSuccess() {
-                        TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
-                        User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
-                        user.setLastLocation(currentLocation);
-                        userService.update(user, Destination.CACHE_IF_PRESENT);
+                countdownService.startCountdown(player, () -> {
+                    TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
+                    User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
+                    user.setLastLocation(currentLocation);
+                    userService.update(user, Destination.CACHE_IF_PRESENT);
 
-                        player.sendMessage(messages.getComponent("commands.tp.coords.success", placeholders));
-                        teleportService.teleport(player.getUniqueId(), location);
-                    }
-
-                    @Override
-                    public void onFail() {
-                        player.sendMessage(messages.getComponent("global.countdown-cancelled"));
-                    }
+                    player.sendMessage(messages.getComponent("commands.tp.coords.success", placeholders));
+                    teleportService.teleport(player.getUniqueId(), location);
                 });
 
                 return;
@@ -141,25 +128,15 @@ public class TPCommand extends DefaultCommand {
                 return;
             }
 
-            int countdownDuration = config.getInt("countdown.duration");
-            double maxMovement = config.getDouble("countdown.max-movement");
             TeleportLocation finalTargetLocation = targetLocation;
-            countdownService.startCountdown(player, countdownDuration, maxMovement, new CountdownCallback() {
-                @Override
-                public void onSuccess() {
-                    TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
-                    User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
-                    user.setLastLocation(currentLocation);
-                    userService.update(target, Destination.CACHE_IF_PRESENT);
+            countdownService.startCountdown(player, () -> {
+                TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
+                User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
+                user.setLastLocation(currentLocation);
+                userService.update(target, Destination.CACHE_IF_PRESENT);
 
-                    player.sendMessage(messages.getComponent("commands.tp.player.success", placeholders));
-                    teleportService.teleport(player.getUniqueId(), finalTargetLocation);
-                }
-
-                @Override
-                public void onFail() {
-                    player.sendMessage(messages.getComponent("global.countdown-cancelled"));
-                }
+                player.sendMessage(messages.getComponent("commands.tp.player.success", placeholders));
+                teleportService.teleport(player.getUniqueId(), finalTargetLocation);
             });
         });
     }

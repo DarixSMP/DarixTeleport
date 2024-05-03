@@ -90,24 +90,14 @@ public class SpawnCommand extends DefaultCommand {
                 return;
             }
 
-            int countdownDuration = config.getInt("countdown.duration");
-            double maxMovement = config.getDouble("countdown.max-movement");
-            countdownService.startCountdown(player, countdownDuration, maxMovement, new CountdownCallback() {
-                @Override
-                public void onSuccess() {
-                    TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
-                    User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
-                    user.setLastLocation(currentLocation);
-                    userService.update(user, Destination.CACHE_IF_PRESENT);
+            countdownService.startCountdown(player, () -> {
+                TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
+                User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
+                user.setLastLocation(currentLocation);
+                userService.update(user, Destination.CACHE_IF_PRESENT);
 
-                    player.sendMessage(messages.getComponent("commands.spawn.success"));
-                    teleportService.teleport(player.getUniqueId(), spawnLocation);
-                }
-
-                @Override
-                public void onFail() {
-                    player.sendMessage(messages.getComponent("global.countdown-cancelled"));
-                }
+                player.sendMessage(messages.getComponent("commands.spawn.success"));
+                teleportService.teleport(player.getUniqueId(), spawnLocation);
             });
         });
     }

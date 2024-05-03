@@ -87,24 +87,14 @@ public class HomeCommand extends DefaultCommand {
                 return;
             }
 
-            int countdownDuration = config.getInt("countdown.duration");
-            double maxMovement = config.getDouble("countdown.max-movement");
-            countdownService.startCountdown(player, countdownDuration, maxMovement, new CountdownCallback() {
-                @Override
-                public void onSuccess() {
-                    TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
-                    User updatedUser = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
-                    updatedUser.setLastLocation(currentLocation);
-                    userService.update(updatedUser, Destination.CACHE_IF_PRESENT);
+            countdownService.startCountdown(player, () -> {
+                TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
+                User updatedUser = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
+                updatedUser.setLastLocation(currentLocation);
+                userService.update(updatedUser, Destination.CACHE_IF_PRESENT);
 
-                    player.sendMessage(messages.getComponent("commands.home.success", placeholders));
-                    teleportService.teleport(player.getUniqueId(), home);
-                }
-
-                @Override
-                public void onFail() {
-                    player.sendMessage(messages.getComponent("global.countdown-cancelled"));
-                }
+                player.sendMessage(messages.getComponent("commands.home.success", placeholders));
+                teleportService.teleport(player.getUniqueId(), home);
             });
         });
     }

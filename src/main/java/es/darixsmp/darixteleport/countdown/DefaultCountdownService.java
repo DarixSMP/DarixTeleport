@@ -18,23 +18,27 @@ public class DefaultCountdownService implements CountdownService {
     private DarixTeleport plugin;
     @Inject @Named("messages")
     private Configuration messages;
+    @Inject @Named("config")
+    private Configuration config;
 
     @Override
-    public void startCountdown(Player player, int seconds, double maxDistance, CountdownCallback countdownCallback) {
+    public void startCountdown(Player player, CountdownCallback countdownCallback) {
         if (player.hasPermission("darixteleport.bypass.countdown")) {
             countdownCallback.onSuccess();
             return;
         }
 
+        int countdownDuration = config.getInt("countdown.duration");
+        double maxMovement = config.getDouble("countdown.max-movement");
         Location originalLocation = player.getLocation();
 
         HashMap<String, String> placeholders = new HashMap<>();
-        placeholders.put("%time%", String.valueOf(seconds));
+        placeholders.put("%time%", String.valueOf(countdownDuration));
         Notification notification = Notification.of(messages, "notifications.countdown", placeholders);
         notification.send(player);
 
         int elapsedSeconds = 0;
-        while (elapsedSeconds < seconds) {
+        while (elapsedSeconds < countdownDuration) {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
@@ -42,15 +46,15 @@ public class DefaultCountdownService implements CountdownService {
             }
 
             Location currentLocation = player.getLocation();
-            if (currentLocation.distance(originalLocation) > maxDistance) {
-                countdownCallback.onFail();
+            if (currentLocation.distance(originalLocation) > maxMovement) {
+                player.sendMessage(messages.getComponent("global.countdown-cancelled"));
                 return;
             }
 
             elapsedSeconds++;
 
-            if (seconds - elapsedSeconds > 0) {
-                placeholders.put("%time%", String.valueOf(seconds - elapsedSeconds));
+            if (countdownDuration - elapsedSeconds > 0) {
+                placeholders.put("%time%", String.valueOf(countdownDuration - elapsedSeconds));
                 notification = Notification.of(messages, "notifications.countdown", placeholders);
                 notification.send(player);
             }
