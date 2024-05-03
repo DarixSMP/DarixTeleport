@@ -13,6 +13,7 @@ import es.darixsmp.darixteleport.command.tp.TPHereCommand;
 import es.darixsmp.darixteleport.command.tp.TPOCommand;
 import es.darixsmp.darixteleport.command.tpa.TPACommand;
 import es.darixsmp.darixteleport.command.tpa.TPAHereCommand;
+import es.darixsmp.darixteleport.command.tpa.TPAcceptCommand;
 import es.darixsmp.darixteleport.command.warp.DelWarpCommand;
 import es.darixsmp.darixteleport.command.warp.SetWarpCommand;
 import es.darixsmp.darixteleport.command.warp.WarpCommand;
@@ -50,6 +51,8 @@ public class CommandLoader {
     private TPACommand tpaCommand;
     @Inject
     private TPAHereCommand tpaHereCommand;
+    @Inject
+    private TPAcceptCommand tpaAcceptCommand;
 
     public void load() {
         setHomeCommand.registerCommand(plugin);
@@ -67,5 +70,6 @@ public class CommandLoader {
         tpCommand.registerCommand(plugin);
         tpaCommand.registerCommand(plugin);
         tpaHereCommand.registerCommand(plugin);
+        tpaAcceptCommand.registerCommand(plugin);
     }
 }

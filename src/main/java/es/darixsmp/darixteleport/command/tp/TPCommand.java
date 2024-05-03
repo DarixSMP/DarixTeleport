@@ -133,7 +133,7 @@ public class TPCommand extends DefaultCommand {
                 TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
                 User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
                 user.setLastLocation(currentLocation);
-                userService.update(target, Destination.CACHE_IF_PRESENT);
+                userService.update(user, Destination.CACHE_IF_PRESENT);
 
                 player.sendMessage(messages.getComponent("commands.tp.player.success", placeholders));
                 teleportService.teleport(player.getUniqueId(), finalTargetLocation);

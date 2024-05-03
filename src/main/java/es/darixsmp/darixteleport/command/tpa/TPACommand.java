@@ -80,10 +80,10 @@ public class TPACommand extends DefaultCommand {
             String targetName = args[0];
 
             User target = userService.getUserByUsername(targetName).orElse(null);
-            if (target == null) {
+            if (target == null || !userService.cacheContainsByUUID(target.getUuid())) {
                 HashMap<String, String> placeholders = new HashMap<>();
                 placeholders.put("%player%", targetName);
-                player.sendMessage(messages.getComponent("global.user-not-found"));
+                player.sendMessage(messages.getComponent("global.user-not-found", placeholders));
                 return;
             }
 
@@ -96,6 +96,7 @@ public class TPACommand extends DefaultCommand {
             HashMap<String, String> placeholders = new HashMap<>();
             placeholders.put("%target%", targetName);
             placeholders.put("%player%", player.getName());
+            placeholders.put("%sender-uuid%", player.getUniqueId().toString());
 
             player.sendMessage(messages.getComponent("commands.tpa.success", placeholders));
 
