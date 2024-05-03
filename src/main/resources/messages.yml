@@ -17,6 +17,8 @@ commands:
   phome:
     not-found: "&c&lERROR &8» &fNo se ha encontrado el home &c%home%&f."
     success: "&e&lHOMES &8» &fTeletransportado al home de &a%player% &fllamado &a%home%&f."
+  setwarp:
+    success: "&e&lWARPS &8» &fHas establecido un nuevo warp llamado &a%warp%&f."
 
 notifications:
   countdown:
