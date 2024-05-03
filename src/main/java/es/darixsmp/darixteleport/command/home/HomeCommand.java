@@ -102,7 +102,7 @@ public class HomeCommand extends DefaultCommand {
 
                 @Override
                 public void onFail() {
-                    player.sendMessage(messages.getComponent("global.countdown-cancelled", placeholders));
+                    player.sendMessage(messages.getComponent("global.countdown-cancelled"));
                 }
             });
         });

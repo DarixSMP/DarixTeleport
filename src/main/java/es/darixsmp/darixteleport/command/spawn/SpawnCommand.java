@@ -1,4 +1,4 @@
-package es.darixsmp.darixteleport.command.home;
+package es.darixsmp.darixteleport.command.spawn;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -11,6 +11,8 @@ import es.darixsmp.darixteleportapi.teleport.TeleportLocation;
 import es.darixsmp.darixteleportapi.teleport.TeleportService;
 import es.darixsmp.darixteleportapi.user.User;
 import es.darixsmp.darixteleportapi.user.UserService;
+import es.darixsmp.darixteleportapi.warp.Warp;
+import es.darixsmp.darixteleportapi.warp.WarpService;
 import net.smoothplugins.smoothbase.configuration.Configuration;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
@@ -18,9 +20,8 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
-public class PHomeCommand extends DefaultCommand {
+public class SpawnCommand extends DefaultCommand {
 
     @Inject
     private UserService userService;
@@ -34,11 +35,12 @@ public class PHomeCommand extends DefaultCommand {
     private Configuration config;
     @Inject
     private DarixTeleport plugin;
-
+    @Inject
+    private WarpService warpService;
 
     @Override
     public String getName() {
-        return "phome";
+        return "spawn";
     }
 
     @Override
@@ -48,17 +50,17 @@ public class PHomeCommand extends DefaultCommand {
 
     @Override
     public String getPermission() {
-        return "darixteleport.command.phome";
+        return "darixteleport.command.sapwn";
     }
 
     @Override
     public int getArgsLength() {
-        return 2;
+        return 0;
     }
 
     @Override
     public String getUsage() {
-        return "/phome <jugador> <nombre>";
+        return "/spawn";
     }
 
     @Override
@@ -74,22 +76,18 @@ public class PHomeCommand extends DefaultCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            String homeName = args[1];
+            String warpName = "spawn";
             Player player = (Player) sender;
 
-            HashMap<String, String> placeholders = new HashMap<>();
-            placeholders.put("%player%", args[0]);
-            placeholders.put("%home%", homeName);
-
-            User target = userService.getUserByUsername(args[0]).orElse(null);
-            if (target == null) {
-                player.sendMessage(messages.getComponent("global.user-not-found", placeholders));
+            Warp warp = warpService.get(warpName).orElse(null);
+            if (warp == null) {
+                player.sendMessage(messages.getComponent("commands.spawn.not-found"));
                 return;
             }
 
-            TeleportLocation home = target.getHome(homeName);
-            if (home == null) {
-                player.sendMessage(messages.getComponent("commands.phome.not-found", placeholders));
+            TeleportLocation spawnLocation = warp.getLocation(DarixTeleport.CURRENT_SERVER);
+            if (spawnLocation == null) {
+                player.sendMessage(messages.getComponent("commands.spawn.not-found"));
                 return;
             }
 
@@ -101,10 +99,10 @@ public class PHomeCommand extends DefaultCommand {
                     TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
                     User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
                     user.setLastLocation(currentLocation);
-                    userService.update(target, Destination.CACHE_IF_PRESENT);
+                    userService.update(user, Destination.CACHE_IF_PRESENT);
 
-                    player.sendMessage(messages.getComponent("commands.phome.success", placeholders));
-                    teleportService.teleport(player.getUniqueId(), home);
+                    player.sendMessage(messages.getComponent("commands.spawn.success"));
+                    teleportService.teleport(player.getUniqueId(), spawnLocation);
                 }
 
                 @Override
@@ -117,18 +115,6 @@ public class PHomeCommand extends DefaultCommand {
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
-        if (args.length == 1) {
-            return userService.getAllConnectedUsernames();
-        }
-
-        if (args.length == 2) {
-            User user = userService.getUserByUsername(args[0]).orElse(null);
-            if (user == null) return null;
-
-            return user.getHomes().keySet().stream().toList();
-        }
-
         return null;
     }
 }
-

@@ -25,6 +25,9 @@ commands:
   warp:
     not-found: "&c&lERROR &8» &fNo se ha encontrado el warp &c%warp%&f."
     success: "&e&lWARPS &8» &fTeletransportado al warp &a%warp%&f."
+  spawn:
+    not-found: "&c&lERROR &8» &fNo se ha encontrado el spawn."
+    success: "&e&lSPAWN &8» &fTeletransportado al spawn."
 
 notifications:
   countdown:

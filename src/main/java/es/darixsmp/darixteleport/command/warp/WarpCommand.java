@@ -20,7 +20,6 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 public class WarpCommand extends DefaultCommand {
 
@@ -111,7 +110,7 @@ public class WarpCommand extends DefaultCommand {
 
                 @Override
                 public void onFail() {
-                    player.sendMessage(messages.getComponent("global.countdown-cancelled", placeholders));
+                    player.sendMessage(messages.getComponent("global.countdown-cancelled"));
                 }
             });
         });
