@@ -19,3 +19,7 @@ home-limits: # darixteleport.homes.<rank>
   vip: 3
   mvp: 5
   ultra: 10
+
+countdown:
+  duration: 3 # In seconds
+  max-movement: 0.5 # In blocks

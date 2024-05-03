@@ -30,6 +30,8 @@ public class HomeCommand extends DefaultCommand {
     private CountdownService countdownService;
     @Inject @Named("messages")
     private Configuration messages;
+    @Inject @Named("config")
+    private Configuration config;
     @Inject
     private DarixTeleport plugin;
 
@@ -85,7 +87,9 @@ public class HomeCommand extends DefaultCommand {
                 return;
             }
 
-            countdownService.startCountdown(player, 3, 0.5, new CountdownCallback() {
+            int countdownDuration = config.getInt("countdown.duration");
+            double maxMovement = config.getDouble("countdown.max-movement");
+            countdownService.startCountdown(player, countdownDuration, maxMovement, new CountdownCallback() {
                 @Override
                 public void onSuccess() {
                     TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
