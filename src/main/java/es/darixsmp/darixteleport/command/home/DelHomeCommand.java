@@ -48,7 +48,7 @@ public class DelHomeCommand extends DefaultCommand {
 
     @Override
     public String getUsage() {
-        return "/sethome <nombre>";
+        return "/delhome <nombre>";
     }
 
     @Override

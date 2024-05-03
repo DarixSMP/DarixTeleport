@@ -11,6 +11,7 @@ import es.darixsmp.darixteleportapi.user.UserService;
 import net.smoothplugins.smoothbase.configuration.Configuration;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.entity.Player;
 
 import java.util.HashMap;
@@ -23,6 +24,8 @@ public class SetHomeCommand extends DefaultCommand {
     private UserService userService;
     @Inject @Named("messages")
     private Configuration messages;
+    @Inject @Named("config")
+    private Configuration config;
     @Inject
     private DarixTeleport plugin;
 
@@ -69,7 +72,25 @@ public class SetHomeCommand extends DefaultCommand {
 
             User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
 
-            // TODO: Check if user can have more homes
+            int maxLimit = 0;
+            if (player.hasPermission("darixteleport.homes.unlimited")) {
+                maxLimit = Integer.MAX_VALUE;
+            } else {
+                ConfigurationSection section = config.getConfigurationSection("home-limits");
+                for (String key : section.getKeys(false)) {
+                    int limit = section.getInt(key);
+                    if (limit > maxLimit && player.hasPermission("darixteleport.homes." + key)) {
+                        maxLimit = limit;
+                    }
+                }
+            }
+
+            if (user.getHomes().size() >= maxLimit) {
+                HashMap<String, String> placeholders = new HashMap<>();
+                placeholders.put("%limit%", String.valueOf(maxLimit));
+                player.sendMessage(messages.getComponent("commands.sethome.limit", placeholders));
+                return;
+            }
 
             TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
             user.setHome(homeName, currentLocation);

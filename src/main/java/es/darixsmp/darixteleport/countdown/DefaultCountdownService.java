@@ -21,6 +21,11 @@ public class DefaultCountdownService implements CountdownService {
 
     @Override
     public void startCountdown(Player player, int seconds, double maxDistance, CountdownCallback countdownCallback) {
+        if (player.hasPermission("darixteleport.bypass.countdown")) {
+            countdownCallback.onSuccess();
+            return;
+        }
+
         Location originalLocation = player.getLocation();
 
         HashMap<String, String> placeholders = new HashMap<>();

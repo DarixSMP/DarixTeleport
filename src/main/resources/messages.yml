@@ -3,15 +3,20 @@ global:
   no-permission: "&c&lERROR &8» &fNo tienes permiso."
   wrong-usage: "&c&lERROR &8» &fUso: &7%usage%&f."
   countdown-cancelled: "&c&lERROR &8» &fTe has movido, el teletransporte ha sido cancelado."
+  user-not-found: "&c&lERROR &8» &fNo se ha encontrado al jugador &c%player%&f."
 
 commands:
   sethome:
+    limit: "&c&lERROR &8» &fHas alcanzado el límite de homes &7(%limit%)&f."
     success: "&e&lHOMES &8» &fHas establecido un nuevo home llamado &a%home%&f."
   home:
     not-found: "&c&lERROR &8» &fNo tienes un home llamado &c%home%&f."
     success: "&e&lHOMES &8» &fTeletransportado a tu home &a%home%&f."
   delhome:
     success: "&e&lHOMES &8» &fHas eliminado tu home &a%home%&f."
+  phome:
+    not-found: "&c&lERROR &8» &fNo se ha encontrado el home &c%home%&f."
+    success: "&e&lHOMES &8» &fTeletransportado al home de &a%player% &fllamado &a%home%&f."
 
 notifications:
   countdown:

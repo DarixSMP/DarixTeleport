@@ -11,6 +11,7 @@ import net.smoothplugins.smoothbase.storage.RedisStorage;
 import net.smoothplugins.smoothusersapi.SmoothUsersAPI;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -137,5 +138,10 @@ public class DefaultUserService implements UserService {
     @Override
     public boolean setTTLOfCacheByUUID(UUID uuid, int seconds) {
         return redisStorage.setTTL(uuid.toString(), seconds);
+    }
+
+    @Override
+    public List<String> getAllConnectedUsernames() {
+        return smoothUsersAPI.getUserService().getAllFromCache(false).stream().map(net.smoothplugins.smoothusersapi.user.User::getUsername).toList();
     }
 }

@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import es.darixsmp.darixteleport.DarixTeleport;
 import es.darixsmp.darixteleport.command.home.DelHomeCommand;
 import es.darixsmp.darixteleport.command.home.HomeCommand;
+import es.darixsmp.darixteleport.command.home.PHomeCommand;
 import es.darixsmp.darixteleport.command.home.SetHomeCommand;
 
 public class CommandLoader {
@@ -17,10 +18,13 @@ public class CommandLoader {
     private HomeCommand homeCommand;
     @Inject
     private DelHomeCommand delHomeCommand;
+    @Inject
+    private PHomeCommand pHomeCommand;
 
     public void load() {
         setHomeCommand.registerCommand(plugin);
         homeCommand.registerCommand(plugin);
         delHomeCommand.registerCommand(plugin);
+        pHomeCommand.registerCommand(plugin);
     }
 }

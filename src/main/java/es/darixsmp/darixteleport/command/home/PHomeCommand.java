@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class HomeCommand extends DefaultCommand {
+public class PHomeCommand extends DefaultCommand {
 
     @Inject
     private UserService userService;
@@ -33,9 +33,10 @@ public class HomeCommand extends DefaultCommand {
     @Inject
     private DarixTeleport plugin;
 
+
     @Override
     public String getName() {
-        return "home";
+        return "phome";
     }
 
     @Override
@@ -45,17 +46,17 @@ public class HomeCommand extends DefaultCommand {
 
     @Override
     public String getPermission() {
-        return "darixteleport.command.home";
+        return "darixteleport.command.phome";
     }
 
     @Override
     public int getArgsLength() {
-        return -1;
+        return 2;
     }
 
     @Override
     public String getUsage() {
-        return "/home (nombre)";
+        return "/phome <jugador> <nombre>";
     }
 
     @Override
@@ -71,17 +72,22 @@ public class HomeCommand extends DefaultCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            String homeName = args.length == 0 ? "casa" : args[0];
+            String homeName = args[1];
             Player player = (Player) sender;
 
-            User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
-            TeleportLocation home = user.getHome(homeName);
-
             HashMap<String, String> placeholders = new HashMap<>();
-            placeholders.put("%home%", homeName.toLowerCase(Locale.ROOT));
+            placeholders.put("%player%", args[0]);
+            placeholders.put("%home%", homeName);
 
+            User target = userService.getUserByUsername(args[0]).orElse(null);
+            if (target == null) {
+                player.sendMessage(messages.getComponent("global.user-not-found", placeholders));
+                return;
+            }
+
+            TeleportLocation home = target.getHome(homeName);
             if (home == null) {
-                player.sendMessage(messages.getComponent("commands.home.not-found", placeholders));
+                player.sendMessage(messages.getComponent("commands.phome.not-found", placeholders));
                 return;
             }
 
@@ -89,10 +95,11 @@ public class HomeCommand extends DefaultCommand {
                 @Override
                 public void onSuccess() {
                     TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
+                    User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
                     user.setLastLocation(currentLocation);
-                    userService.update(user, Destination.CACHE_IF_PRESENT);
+                    userService.update(target, Destination.CACHE_IF_PRESENT);
 
-                    player.sendMessage(messages.getComponent("commands.home.success", placeholders));
+                    player.sendMessage(messages.getComponent("commands.phome.success", placeholders));
                     teleportService.teleport(player.getUniqueId(), home);
                 }
 
@@ -107,11 +114,17 @@ public class HomeCommand extends DefaultCommand {
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            Player player = (Player) sender;
-            User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
+            return userService.getAllConnectedUsernames();
+        }
+
+        if (args.length == 2) {
+            User user = userService.getUserByUsername(args[0]).orElse(null);
+            if (user == null) return null;
+
             return user.getHomes().keySet().stream().toList();
         }
 
         return null;
     }
 }
+
