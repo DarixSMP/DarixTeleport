@@ -30,6 +30,8 @@ commands:
     success: "&e&lSPAWN &8» &fTeletransportado al spawn."
   back:
     success: "&e&lBACK &8» &fTeletransportado a tu última ubicación."
+  tpo:
+    success: "&e&lTP &8» &fTeletransportado a la última ubicación de &a%player%&f."
 
 notifications:
   countdown:

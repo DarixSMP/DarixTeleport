@@ -1,4 +1,4 @@
-package es.darixsmp.darixteleport.command.home;
+package es.darixsmp.darixteleport.command.tp;
 
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
@@ -19,7 +19,7 @@ import org.bukkit.entity.Player;
 import java.util.HashMap;
 import java.util.List;
 
-public class PHomeCommand extends DefaultCommand {
+public class TPOfflineCommand extends DefaultCommand {
 
     @Inject
     private UserService userService;
@@ -37,7 +37,7 @@ public class PHomeCommand extends DefaultCommand {
 
     @Override
     public String getName() {
-        return "phome";
+        return "tpo";
     }
 
     @Override
@@ -47,17 +47,17 @@ public class PHomeCommand extends DefaultCommand {
 
     @Override
     public String getPermission() {
-        return "darixteleport.command.phome";
+        return "darixteleport.command.tpo";
     }
 
     @Override
     public int getArgsLength() {
-        return 2;
+        return 1;
     }
 
     @Override
     public String getUsage() {
-        return "/phome <jugador> <nombre>";
+        return "/phome <jugador>";
     }
 
     @Override
@@ -73,12 +73,10 @@ public class PHomeCommand extends DefaultCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            String homeName = args[1];
             Player player = (Player) sender;
 
             HashMap<String, String> placeholders = new HashMap<>();
             placeholders.put("%player%", args[0]);
-            placeholders.put("%home%", homeName);
 
             User target = userService.getUserByUsername(args[0]).orElse(null);
             if (target == null) {
@@ -86,11 +84,7 @@ public class PHomeCommand extends DefaultCommand {
                 return;
             }
 
-            TeleportLocation home = target.getHome(homeName);
-            if (home == null) {
-                player.sendMessage(messages.getComponent("commands.phome.not-found", placeholders));
-                return;
-            }
+            TeleportLocation lastLocation = target.getLastLocation();
 
             int countdownDuration = config.getInt("countdown.duration");
             double maxMovement = config.getDouble("countdown.max-movement");
@@ -102,8 +96,8 @@ public class PHomeCommand extends DefaultCommand {
                     user.setLastLocation(currentLocation);
                     userService.update(target, Destination.CACHE_IF_PRESENT);
 
-                    player.sendMessage(messages.getComponent("commands.phome.success", placeholders));
-                    teleportService.teleport(player.getUniqueId(), home);
+                    player.sendMessage(messages.getComponent("commands.tpo.success", placeholders));
+                    teleportService.teleport(player.getUniqueId(), lastLocation);
                 }
 
                 @Override
@@ -117,17 +111,9 @@ public class PHomeCommand extends DefaultCommand {
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            return userService.getAllConnectedUsernames();
-        }
-
-        if (args.length == 2) {
-            User user = userService.getUserByUsername(args[0]).orElse(null);
-            if (user == null) return null;
-
-            return user.getHomes().keySet().stream().toList();
+            return List.of("<player>");
         }
 
         return null;
     }
 }
-
