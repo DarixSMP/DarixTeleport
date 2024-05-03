@@ -8,6 +8,7 @@ import es.darixsmp.darixteleportapi.teleport.TeleportLocation;
 import es.darixsmp.darixteleportapi.warp.Warp;
 import es.darixsmp.darixteleportapi.warp.WarpService;
 import net.smoothplugins.smoothbase.configuration.Configuration;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -20,6 +21,8 @@ public class SetWarpCommand extends DefaultCommand {
     private Configuration messages;
     @Inject
     private WarpService warpService;
+    @Inject
+    private DarixTeleport plugin;
 
     @Override
     public String getName() {
@@ -58,17 +61,19 @@ public class SetWarpCommand extends DefaultCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        String name = args[0];
-        Player player = (Player) sender;
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            String name = args[0];
+            Player player = (Player) sender;
 
-        TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
-        Warp warp = warpService.get(name).orElseGet(() -> new Warp(name));
-        warp.addLocation(currentLocation);
-        warpService.create(warp);
+            TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
+            Warp warp = warpService.get(name).orElseGet(() -> new Warp(name));
+            warp.addLocation(currentLocation);
+            warpService.create(warp);
 
-        HashMap<String, String> placeholders = new HashMap<>();
-        placeholders.put("%warp%", name);
-        sender.sendMessage(messages.getComponent("commands.setwarp.success", placeholders));
+            HashMap<String, String> placeholders = new HashMap<>();
+            placeholders.put("%warp%", name);
+            sender.sendMessage(messages.getComponent("commands.setwarp.success", placeholders));
+        });
     }
 
     @Override

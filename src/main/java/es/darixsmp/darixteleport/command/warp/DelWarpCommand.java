@@ -9,6 +9,7 @@ import es.darixsmp.darixteleportapi.teleport.TeleportLocation;
 import es.darixsmp.darixteleportapi.warp.Warp;
 import es.darixsmp.darixteleportapi.warp.WarpService;
 import net.smoothplugins.smoothbase.configuration.Configuration;
+import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
@@ -23,6 +24,8 @@ public class DelWarpCommand extends DefaultCommand {
     private Configuration messages;
     @Inject
     private WarpService warpService;
+    @Inject
+    private DarixTeleport plugin;
 
     @Override
     public String getName() {
@@ -61,28 +64,30 @@ public class DelWarpCommand extends DefaultCommand {
 
     @Override
     public void execute(CommandSender sender, String[] args) {
-        String name = args[0];
-        String server = args[1];
+        Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+            String name = args[0];
+            String server = args[1];
 
-        HashMap<String, String> placeholders = new HashMap<>();
-        placeholders.put("%warp%", name);
-        placeholders.put("%server%", server);
+            HashMap<String, String> placeholders = new HashMap<>();
+            placeholders.put("%warp%", name);
+            placeholders.put("%server%", server);
 
-        Warp warp = warpService.get(name).orElse(null);
-        if (warp == null) {
-            sender.sendMessage(messages.getComponent("commands.delwarp.not-found", placeholders));
-            return;
-        }
+            Warp warp = warpService.get(name).orElse(null);
+            if (warp == null) {
+                sender.sendMessage(messages.getComponent("commands.delwarp.not-found", placeholders));
+                return;
+            }
 
-        if (server.equalsIgnoreCase("all")) {
-            warpService.delete(warp.getName());
+            if (server.equalsIgnoreCase("all")) {
+                warpService.delete(warp.getName());
+                sender.sendMessage(messages.getComponent("commands.delwarp.success", placeholders));
+                return;
+            }
+
+            warp.removeLocation(server);
+            warpService.update(warp, Destination.DATABASE, Destination.CACHE_IF_PRESENT);
             sender.sendMessage(messages.getComponent("commands.delwarp.success", placeholders));
-            return;
-        }
-
-        warp.removeLocation(server);
-        warpService.update(warp, Destination.DATABASE, Destination.CACHE_IF_PRESENT);
-        sender.sendMessage(messages.getComponent("commands.delwarp.success", placeholders));
+        });
     }
 
     @Override
