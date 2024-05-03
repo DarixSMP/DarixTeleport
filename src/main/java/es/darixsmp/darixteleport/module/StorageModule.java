@@ -35,4 +35,9 @@ public class StorageModule extends AbstractModule {
     public RedisStorage providePendingRedisStorage(RedisConnection redisConnection) {
         return new RedisStorage(redisConnection, "pending");
     }
+
+    @Provides @Named("request") @Singleton
+    public RedisStorage provideRequestRedisStorage(RedisConnection redisConnection) {
+        return new RedisStorage(redisConnection, "request");
+    }
 }

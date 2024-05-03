@@ -13,6 +13,7 @@ timeouts: # In milliseconds
   get-teleport-location-request: 3000 # 3 seconds
   pending-teleport-ttl: 10000 # 10 seconds
   user-quit: 600000 # 10 minutes
+  pending-request: 300000 # 5 minutes
 
 home-limits: # darixteleport.homes.<rank>
   default: 1
