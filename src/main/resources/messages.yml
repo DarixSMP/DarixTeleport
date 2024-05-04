@@ -8,54 +8,54 @@ global:
 commands:
   sethome:
     limit: "&c&lERROR &8» &fHas alcanzado el límite de homes &7(%limit%)&f."
-    success: "&e&lHOMES &8» &fHas establecido un nuevo home llamado &a%home%&f."
+    success: "&a&lHOMES &8» &fHas establecido un nuevo home llamado &a%home%&f."
   home:
     not-found: "&c&lERROR &8» &fNo tienes un home llamado &c%home%&f."
-    success: "&e&lHOMES &8» &fTeletransportado a tu home &a%home%&f."
+    success: "&a&lHOMES &8» &fTeletransportado a tu home &a%home%&f."
   delhome:
-    success: "&e&lHOMES &8» &fHas eliminado tu home &a%home%&f."
+    success: "&a&lHOMES &8» &fHas eliminado tu home &a%home%&f."
   phome:
     not-found: "&c&lERROR &8» &fNo se ha encontrado el home &c%home%&f."
-    success: "&e&lHOMES &8» &fTeletransportado al home de &a%player% &fllamado &a%home%&f."
+    success: "&a&lHOMES &8» &fTeletransportado al home de &a%player% &fllamado &a%home%&f."
   homes:
     no-homes: "&c&lERROR &8» &fNo tienes homes establecidos."
-    header: "&e&lHOMES &8» &fLista de homes:"
+    header: "&a&lHOMES &8» &fLista de homes:"
     format: "<gray>- <white>%home% <gray>(<click:run_command:/home %home%><green><b><underlined>IR</click><reset><gray>)"
   setwarp:
-    success: "&e&lWARPS &8» &fHas establecido un nuevo warp llamado &a%warp%&f."
+    success: "&a&lWARPS &8» &fHas establecido un nuevo warp llamado &a%warp%&f."
   delwarp:
     not-found: "&c&lERROR &8» &fNo se ha encontrado el warp &c%warp%&f."
-    success: "&e&lWARPS &8» &fHas eliminado el warp &a%warp% &fen el server &a%server%&f."
+    success: "&a&lWARPS &8» &fHas eliminado el warp &a%warp% &fen el server &a%server%&f."
   warp:
     not-found: "&c&lERROR &8» &fNo se ha encontrado el warp &c%warp%&f."
-    success: "&e&lWARPS &8» &fTeletransportado al warp &a%warp%&f."
+    success: "&a&lWARPS &8» &fTeletransportado al warp &a%warp%&f."
   spawn:
     not-found: "&c&lERROR &8» &fNo se ha encontrado el spawn."
-    success: "&e&lSPAWN &8» &fTeletransportado al spawn."
+    success: "&a&lSPAWN &8» &fTeletransportado al spawn."
   back:
-    success: "&e&lBACK &8» &fTeletransportado a tu última ubicación."
+    success: "&a&lBACK &8» &fTeletransportado a tu última ubicación."
   tpo:
-    success: "&e&lTP &8» &fTeletransportado a la última ubicación de &a%player%&f."
+    success: "&a&lTP &8» &fTeletransportado a la última ubicación de &a%player%&f."
   tphere:
-    success: "&e&lTP &8» &fTeletransportado a &a%target% &fa tu ubicación."
-    success-target: "&e&lTP &8» &fTeletransportado a la ubicación de &a%player%&f."
+    success: "&a&lTP &8» &fTeletransportado a &a%target% &fa tu ubicación."
+    success-target: "&a&lTP &8» &fTeletransportado a la ubicación de &a%player%&f."
   tp:
     coords:
       invalid-coords: "&c&lERROR &8» &fLas coordenadas son inválidas."
-      success: "&e&lTP &8» &fTeletransportado a &a%coords%&f."
+      success: "&a&lTP &8» &fTeletransportado a &a%coords%&f."
     player:
-      success: "&e&lTP &8» &fTeletransportado a &a%player%&f."
+      success: "&a&lTP &8» &fTeletransportado a &a%player%&f."
   tpa:
-    success: "&e&lTP &8» &fHas enviado una solicitud de teletransporte a &a%target%&f."
-    success-target: "<yellow><b>TP<reset> <dark_gray>» <white>Has recibido una solicitud de teletransporte de <green>%player%<white>, para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset>"
-    accepted: "&e&lTP &8» &fLa solicitud de teletransporte a &a%target% &fha sido aceptada."
-    teleporting: "&e&lTP &8» &fTeletransportando a &a%target%&f."
+    success: "&a&lTPA &8» &fHas enviado una solicitud de teletransporte a &a%target%&f."
+    success-target: "<yellow><b>TPA<reset> <dark_gray>» <white>Has recibido una solicitud de teletransporte de <green>%player%<white>, para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset>"
+    accepted: "&a&lTPA &8» &fLa solicitud de teletransporte a &a%target% &fha sido aceptada."
+    teleporting: "&a&lTPA &8» &fTeletransportando a &a%target%&f."
   tpahere:
-    success: "&e&lTP &8» &fHas enviado una solicitud de teletransporte a tu ubicación a &a%target%&f."
-    success-target: "<yellow><b>TP<reset> <dark_gray>» <white>Has recibido una solicitud de teletransporte a <red><b>SU</b> <white>ubicación de <green>%player%<white>, para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset>"
+    success: "&a&lTPA &8» &fHas enviado una solicitud de teletransporte a tu ubicación a &a%target%&f."
+    success-target: "<yellow><b>TPA<reset> <dark_gray>» <white>Has recibido una solicitud de teletransporte a <red><b>SU</b> <white>ubicación de <green>%player%<white>, para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset>"
   tpaccept:
     no-request: "&c&lERROR &8» &fNo tienes ninguna solicitud de teletransporte pendiente."
-    success: "&e&lTP &8» &fHas aceptado la solicitud de teletransporte."
+    success: "&a&lTPA &8» &fHas aceptado la solicitud de teletransporte."
     here:
       get-location-error: "&c&lERROR &8» &fNo se ha podido obtener la ubicación del destino."
 
