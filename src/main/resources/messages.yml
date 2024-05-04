@@ -52,7 +52,7 @@ commands:
     teleporting: "&e&lTP &8» &fTeletransportando a &a%target%&f."
   tpahere:
     success: "&e&lTP &8» &fHas enviado una solicitud de teletransporte a tu ubicación a &a%target%&f."
-    success-target: "<yellow><b>TP<reset> <dark_gray>» <white>Has recibido una solicitud de teletransporte a <red><b>SU</b> <white>de <green>%player%<white>, para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset>"
+    success-target: "<yellow><b>TP<reset> <dark_gray>» <white>Has recibido una solicitud de teletransporte a <red><b>SU</b> <white>ubicación de <green>%player%<white>, para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset>"
   tpaccept:
     no-request: "&c&lERROR &8» &fNo tienes ninguna solicitud de teletransporte pendiente."
     success: "&e&lTP &8» &fHas aceptado la solicitud de teletransporte."
@@ -64,10 +64,10 @@ notifications:
     chat:
       enabled: true
       content:
-        - "&a&lTP &8» &fEl teletransporte iniciará en &d%time%&f, no te muevas."
+        - "&a&lTP &8» &fEl teletransporte iniciará en &d%time%&f segundos, no te muevas."
     actionbar:
       enabled: true
-      content: "&a&lTP &8» &fEl teletransporte iniciará en &d%time%&f, no te muevas."
+      content: "&a&lTP &8» &fEl teletransporte iniciará en &d%time%&f segundos, no te muevas."
     title:
       enabled: false
       title: "&cTitle"
