@@ -47,16 +47,12 @@ commands:
       success: "&e&lTP &8» &fTeletransportado a &a%player%&f."
   tpa:
     success: "&e&lTP &8» &fHas enviado una solicitud de teletransporte a &a%target%&f."
-    success-target:
-      - "&e&lTP &8» &fHas recibido una solicitud de teletransporte de &a%player%&f, para aceptarla"
-      - "<white>escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset>"
+    success-target: "<yellow><b>TP<reset> <dark_gray>» <white>Has recibido una solicitud de teletransporte de <green>%player%<white>, para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset>"
     accepted: "&e&lTP &8» &fLa solicitud de teletransporte a &a%target% &fha sido aceptada."
     teleporting: "&e&lTP &8» &fTeletransportando a &a%target%&f."
   tpahere:
     success: "&e&lTP &8» &fHas enviado una solicitud de teletransporte a tu ubicación a &a%target%&f."
-    success-target:
-      - "&e&lTP &8» &fHas recibido una solicitud de teletransporte a SU ubicación de &a%player%&f, para aceptarla"
-      - "<white>escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset>"
+    success-target: "<yellow><b>TP<reset> <dark_gray>» <white>Has recibido una solicitud de teletransporte a <red><b>SU</b> <white>de <green>%player%<white>, para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset>"
   tpaccept:
     no-request: "&c&lERROR &8» &fNo tienes ninguna solicitud de teletransporte pendiente."
     success: "&e&lTP &8» &fHas aceptado la solicitud de teletransporte."

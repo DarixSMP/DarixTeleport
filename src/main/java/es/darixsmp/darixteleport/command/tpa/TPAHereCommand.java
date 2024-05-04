@@ -100,7 +100,7 @@ public class TPAHereCommand extends DefaultCommand {
 
             player.sendMessage(messages.getComponent("commands.tpahere.success", placeholders));
 
-            List<String> targetMessages = messages.getStringList("commands.tpahere.success-target", placeholders);
+            String targetMessages = messages.getString("commands.tpahere.success-target", placeholders);
             PlayerMessage targetMessage = new PlayerMessage(target.getUuid(), targetMessages);
             messenger.send(serializer.serialize(targetMessage));
         });

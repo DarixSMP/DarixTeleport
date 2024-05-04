@@ -80,14 +80,12 @@ public class SpawnCommand extends DefaultCommand {
 
             Warp warp = warpService.get(warpName).orElse(null);
             if (warp == null) {
-                System.out.println("1");
                 player.sendMessage(messages.getComponent("commands.spawn.not-found"));
                 return;
             }
 
             TeleportLocation spawnLocation = warp.getLocation(DarixTeleport.CURRENT_SERVER);
             if (spawnLocation == null) {
-                System.out.println("2");
                 player.sendMessage(messages.getComponent("commands.spawn.not-found"));
                 return;
             }

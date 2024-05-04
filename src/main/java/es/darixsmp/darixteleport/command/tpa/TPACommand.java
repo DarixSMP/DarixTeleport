@@ -100,7 +100,7 @@ public class TPACommand extends DefaultCommand {
 
             player.sendMessage(messages.getComponent("commands.tpa.success", placeholders));
 
-            List<String> targetMessages = messages.getStringList("commands.tpa.success-target", placeholders);
+            String targetMessages = messages.getString("commands.tpa.success-target", placeholders);
             PlayerMessage targetMessage = new PlayerMessage(target.getUuid(), targetMessages);
             messenger.send(serializer.serialize(targetMessage));
         });
