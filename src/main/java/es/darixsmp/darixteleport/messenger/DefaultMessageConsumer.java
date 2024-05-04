@@ -14,6 +14,7 @@ import net.smoothplugins.smoothbase.configuration.Configuration;
 import net.smoothplugins.smoothbase.messenger.MessageConsumer;
 import net.smoothplugins.smoothbase.messenger.Messenger;
 import net.smoothplugins.smoothbase.serializer.Serializer;
+import net.smoothplugins.smoothbase.utility.ComponentTranslator;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.Nullable;
@@ -102,6 +103,6 @@ public class DefaultMessageConsumer implements MessageConsumer {
         Player player = Bukkit.getPlayer(message.getPlayerUUID());
         if (player == null) return;
 
-        message.getMessage().forEach(player::sendMessage);
+        ComponentTranslator.toComponent(message.getMessage()).forEach(player::sendMessage);
     }
 }
