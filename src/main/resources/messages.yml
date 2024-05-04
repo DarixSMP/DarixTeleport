@@ -17,6 +17,10 @@ commands:
   phome:
     not-found: "&c&lERROR &8» &fNo se ha encontrado el home &c%home%&f."
     success: "&e&lHOMES &8» &fTeletransportado al home de &a%player% &fllamado &a%home%&f."
+  homes:
+    no-homes: "&c&lERROR &8» &fNo tienes homes establecidos."
+    header: "&e&lHOMES &8» &fLista de homes:"
+    format: "<gray>- <white>%home% <gray>(<click:run_command:/home %home%><green><b><underlined>IR</click><reset><gray>)"
   setwarp:
     success: "&e&lWARPS &8» &fHas establecido un nuevo warp llamado &a%warp%&f."
   delwarp:

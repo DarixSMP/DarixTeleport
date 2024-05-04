@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
-public class DelHomeCommand extends DefaultCommand {
+public class HomesCommand extends DefaultCommand {
 
     @Inject
     private UserService userService;
@@ -27,7 +27,7 @@ public class DelHomeCommand extends DefaultCommand {
 
     @Override
     public String getName() {
-        return "delhome";
+        return "homes";
     }
 
     @Override
@@ -37,17 +37,17 @@ public class DelHomeCommand extends DefaultCommand {
 
     @Override
     public String getPermission() {
-        return "darixteleport.command.delhome";
+        return "darixteleport.command.homes";
     }
 
     @Override
     public int getArgsLength() {
-        return 1;
+        return 0;
     }
 
     @Override
     public String getUsage() {
-        return "/delhome <nombre>";
+        return "/homes";
     }
 
     @Override
@@ -66,23 +66,23 @@ public class DelHomeCommand extends DefaultCommand {
             Player player = (Player) sender;
 
             User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
-            user.removeHome(args[0]);
-            userService.update(user, Destination.CACHE_IF_PRESENT);
 
-            HashMap<String, String> placeholders = new HashMap<>();
-            placeholders.put("%home%", args[0].toLowerCase(Locale.ROOT));
-            player.sendMessage(messages.getComponent("commands.delhome.success", placeholders));
+            if (user.getHomes().isEmpty()) {
+                player.sendMessage(messages.getComponent("commands.homes.no-homes"));
+                return;
+            }
+
+            player.sendMessage(messages.getComponent("commands.homes.header"));
+            user.getHomes().forEach((name, location) -> {
+                HashMap<String, String> placeholders = new HashMap<>();
+                placeholders.put("%home%", name.toLowerCase(Locale.ROOT));
+                player.sendMessage(messages.getComponent("commands.homes.home", placeholders));
+            });
         });
     }
 
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
-        if (args.length == 1) {
-            Player player = (Player) sender;
-            User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
-            return user.getHomes().keySet().stream().toList();
-        }
-
         return null;
     }
 }
