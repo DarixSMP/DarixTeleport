@@ -50,6 +50,8 @@ commands:
     success-target:
       - "&e&lTP &8» &fHas recibido una solicitud de teletransporte de &a%player%&f,"
       - "<white>para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset>"
+    accepted: "&e&lTP &8» &fLa solicitud de teletransporte a &a%target% &fha sido aceptada."
+    teleporting: "&e&lTP &8» &fTeletransportando a &a%target%&f."
   tpahere:
     success: "&e&lTP &8» &fHas enviado una solicitud de teletransporte a tu ubicación a &a%target%&f."
     success-target:
