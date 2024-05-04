@@ -76,7 +76,7 @@ public class HomesCommand extends DefaultCommand {
             user.getHomes().forEach((name, location) -> {
                 HashMap<String, String> placeholders = new HashMap<>();
                 placeholders.put("%home%", name.toLowerCase(Locale.ROOT));
-                player.sendMessage(messages.getComponent("commands.homes.home", placeholders));
+                player.sendMessage(messages.getComponent("commands.homes.format", placeholders));
             });
         });
     }
