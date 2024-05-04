@@ -29,7 +29,7 @@ public class DefaultRequestService implements RequestService {
     @Override
     public void create(Request request) {
         redisStorage.createWithTTL(request.getSender().toString() + request.getReceiver().toString(),
-                serializer.serialize(request), config.getInt("timeouts.pending-teleport-ttl") / 1000);
+                serializer.serialize(request), config.getInt("timeouts.pending-request") / 1000);
     }
 
     @Override

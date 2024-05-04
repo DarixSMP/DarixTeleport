@@ -94,7 +94,7 @@ public class DefaultMessageConsumer implements MessageConsumer {
             user.setLastLocation(currentLocation);
             userService.update(user, Destination.CACHE_IF_PRESENT);
 
-            player.sendMessage(messages.getComponent("commands.tpa.teleporting"));
+            player.sendMessage(messages.getComponent("commands.tpa.teleporting", placeholders));
             teleportService.teleport(player.getUniqueId(), message.getLocation());
         });
     }
