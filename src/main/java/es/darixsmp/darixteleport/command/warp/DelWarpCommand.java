@@ -78,8 +78,8 @@ public class DelWarpCommand extends DefaultCommand {
                 return;
             }
 
-            if (server.equalsIgnoreCase("all")) {
-                warpService.delete(warp.getName());
+            if (server.equalsIgnoreCase("all") || warp.getLocations().size() == 1) {
+                warpService.delete(warp.getName(), Destination.DATABASE, Destination.CACHE_IF_PRESENT);
                 sender.sendMessage(messages.getComponent("commands.delwarp.success", placeholders));
                 return;
             }

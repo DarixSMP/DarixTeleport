@@ -4,6 +4,7 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import es.darixsmp.darixteleport.DarixTeleport;
 import es.darixsmp.darixteleport.command.DefaultCommand;
+import es.darixsmp.darixteleportapi.service.Destination;
 import es.darixsmp.darixteleportapi.teleport.TeleportLocation;
 import es.darixsmp.darixteleportapi.warp.Warp;
 import es.darixsmp.darixteleportapi.warp.WarpService;
@@ -66,9 +67,14 @@ public class SetWarpCommand extends DefaultCommand {
             Player player = (Player) sender;
 
             TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, player.getLocation());
-            Warp warp = warpService.get(name).orElseGet(() -> new Warp(name));
+            Warp warp = warpService.get(name).orElse(null);
+            if (warp == null) {
+                warp = new Warp(name);
+                warpService.create(warp);
+            }
+
             warp.addLocation(currentLocation);
-            warpService.create(warp);
+            warpService.update(warp, Destination.DATABASE, Destination.CACHE_IF_PRESENT);
 
             HashMap<String, String> placeholders = new HashMap<>();
             placeholders.put("%warp%", name);
