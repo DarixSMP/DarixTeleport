@@ -23,8 +23,8 @@ public class DefaultWarpService implements WarpService {
     private Serializer serializer;
 
     @Override
-    public Optional<Warp> get(String s) {
-        return Optional.empty();
+    public Optional<Warp> get(String warp) {
+        return Optional.ofNullable(serializer.deserialize(redisStorage.get(warp), Warp.class));
     }
 
     @Override
