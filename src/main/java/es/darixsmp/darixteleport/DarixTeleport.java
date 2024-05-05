@@ -2,8 +2,10 @@ package es.darixsmp.darixteleport;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import es.darixsmp.darixteleport.api.DefaultDarixTeleportAPI;
 import es.darixsmp.darixteleport.loader.MainLoader;
 import es.darixsmp.darixteleport.module.*;
+import es.darixsmp.darixteleportapi.DarixTeleportAPI;
 import net.smoothplugins.smoothbase.configuration.Configuration;
 import net.smoothplugins.smoothbase.connection.MongoConnection;
 import net.smoothplugins.smoothbase.connection.RedisConnection;
@@ -46,6 +48,13 @@ public final class DarixTeleport extends JavaPlugin {
         );
 
         injector.getInstance(MainLoader.class).load();
+
+        getServer().getServicesManager().register(
+                DarixTeleportAPI.class,
+                injector.getInstance(DefaultDarixTeleportAPI.class),
+                this,
+                org.bukkit.plugin.ServicePriority.Normal
+        );
     }
 
     @Override
