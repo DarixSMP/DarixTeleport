@@ -1,6 +1,7 @@
 package es.darixsmp.darixteleport.api;
 
 import com.google.inject.Inject;
+import es.darixsmp.darixteleport.DarixTeleport;
 import es.darixsmp.darixteleportapi.DarixTeleportAPI;
 import es.darixsmp.darixteleportapi.countdown.CountdownService;
 import es.darixsmp.darixteleportapi.pending.PendingTeleportService;
@@ -52,5 +53,10 @@ public class DefaultDarixTeleportAPI implements DarixTeleportAPI {
     @Override
     public UserService getUserService() {
         return userService;
+    }
+
+    @Override
+    public String getCurrentServer() {
+        return DarixTeleport.CURRENT_SERVER;
     }
 }
