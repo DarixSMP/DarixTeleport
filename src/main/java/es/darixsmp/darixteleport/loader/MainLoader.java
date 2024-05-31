@@ -3,6 +3,7 @@ package es.darixsmp.darixteleport.loader;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import es.darixsmp.darixteleport.DarixTeleport;
+import es.darixsmp.darixteleport.hook.PlaceholderAPIHook;
 import es.darixsmp.darixteleportapi.service.Destination;
 import es.darixsmp.darixteleportapi.teleport.TeleportLocation;
 import es.darixsmp.darixteleportapi.user.User;
@@ -30,6 +31,8 @@ public class MainLoader {
     private DarixTeleport plugin;
     @Inject
     private Messenger messenger;
+    @Inject
+    private PlaceholderAPIHook placeholderAPIHook;
 
     public void load() {
         commandLoader.load();
@@ -39,6 +42,8 @@ public class MainLoader {
 
         Bukkit.getMessenger().registerOutgoingPluginChannel(plugin, "BungeeCord");
         messenger.register();
+
+        placeholderAPIHook.register();
     }
 
     public void unload() {
