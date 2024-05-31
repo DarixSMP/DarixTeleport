@@ -15,7 +15,7 @@ public class PlaceholderAPIHook extends PlaceholderExpansion {
 
     @Override
     public @NotNull String getIdentifier() {
-        return "DarixCrates";
+        return "DarixTeleport";
     }
 
     @Override
