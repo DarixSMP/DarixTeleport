@@ -22,6 +22,8 @@ public class PlayerRespawnListener implements Listener {
 
     @EventHandler
     public void onRespawn(PlayerRespawnEvent event) {
+        event.setRespawnLocation(event.getPlayer().getLocation());
+
         Bukkit.getScheduler().runTaskLaterAsynchronously(plugin, () -> {
             Warp warp = warpService.get("spawn").orElse(null);
             if (warp == null) return;
