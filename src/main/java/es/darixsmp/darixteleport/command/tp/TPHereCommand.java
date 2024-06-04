@@ -48,7 +48,7 @@ public class TPHereCommand extends DefaultCommand {
 
     @Override
     public List<String> getAliases() {
-        return null;
+        return List.of("s");
     }
 
     @Override

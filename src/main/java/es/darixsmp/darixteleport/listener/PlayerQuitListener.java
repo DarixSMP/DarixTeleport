@@ -13,6 +13,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerQuitEvent;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
+
 public class PlayerQuitListener implements Listener {
 
     @Inject
@@ -21,14 +25,19 @@ public class PlayerQuitListener implements Listener {
     private DarixTeleport plugin;
     @Inject @Named("config")
     private Configuration config;
+    public static final List<UUID> ignoreLastLocation = new ArrayList<>();
 
     @EventHandler
     public void onQuit(PlayerQuitEvent event) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             User user = userService.getUserByUUID(event.getPlayer().getUniqueId()).orElseThrow();
 
-            TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, event.getPlayer().getLocation());
-            user.setLastLocation(currentLocation);
+            if (ignoreLastLocation.contains(user.getUuid())) {
+                ignoreLastLocation.remove(user.getUuid());
+            } else {
+                TeleportLocation currentLocation = TeleportLocation.fromLocation(DarixTeleport.CURRENT_SERVER, event.getPlayer().getLocation());
+                user.setLastLocation(currentLocation);
+            }
 
             userService.update(user, Destination.DATABASE, Destination.CACHE_IF_PRESENT);
             userService.setTTLOfCacheByUUID(user.getUuid(), config.getInt("timeouts.user-quit") / 1000);
