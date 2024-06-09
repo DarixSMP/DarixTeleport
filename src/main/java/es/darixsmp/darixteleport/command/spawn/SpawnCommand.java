@@ -44,7 +44,7 @@ public class SpawnCommand extends DefaultCommand {
 
     @Override
     public List<String> getAliases() {
-        return null;
+        return List.of("hub", "lobby");
     }
 
     @Override
