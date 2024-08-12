@@ -81,6 +81,11 @@ public class TPHereCommand extends DefaultCommand {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             Player player = (Player) sender;
 
+            if (player.getName().equalsIgnoreCase(args[0])) {
+                player.sendMessage(messages.getComponent("global.self"));
+                return;
+            }
+
             HashMap<String, String> placeholders = new HashMap<>();
             placeholders.put("%target%", args[0]);
             placeholders.put("%player%", player.getName());

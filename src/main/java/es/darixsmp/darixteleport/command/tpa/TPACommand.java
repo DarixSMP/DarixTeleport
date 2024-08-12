@@ -79,6 +79,11 @@ public class TPACommand extends DefaultCommand {
             Player player = (Player) sender;
             String targetName = args[0];
 
+            if (player.getName().equalsIgnoreCase(targetName)) {
+                player.sendMessage(messages.getComponent("global.self"));
+                return;
+            }
+
             User target = userService.getUserByUsername(targetName).orElse(null);
             if (target == null || !userService.cacheContainsByUUID(target.getUuid())) {
                 HashMap<String, String> placeholders = new HashMap<>();

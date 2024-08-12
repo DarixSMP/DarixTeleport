@@ -4,6 +4,7 @@ global:
   wrong-usage: "&c&lERROR &8» &fUso: &7%usage%&f."
   countdown-cancelled: "&c&lERROR &8» &fTe has movido, el teletransporte ha sido cancelado."
   user-not-found: "&c&lERROR &8» &fNo se ha encontrado al jugador &c%player%&f."
+  self: "&c&lERROR &8» &fNo puedes hacer eso contigo mismo."
 
 commands:
   sethome:

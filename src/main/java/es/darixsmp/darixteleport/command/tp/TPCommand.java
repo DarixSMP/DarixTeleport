@@ -111,6 +111,11 @@ public class TPCommand extends DefaultCommand {
                 return;
             }
 
+            if (player.getName().equalsIgnoreCase(args[0])) {
+                player.sendMessage(messages.getComponent("global.self"));
+                return;
+            }
+
             HashMap<String, String> placeholders = new HashMap<>();
             placeholders.put("%player%", args[0]);
 
