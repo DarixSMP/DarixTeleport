@@ -85,6 +85,10 @@ public class SetHomeCommand extends DefaultCommand {
                 }
             }
 
+            if (maxLimit != Integer.MAX_VALUE) {
+                maxLimit += user.getExtraHomes();
+            }
+
             if (user.getHomes().size() >= maxLimit) {
                 HashMap<String, String> placeholders = new HashMap<>();
                 placeholders.put("%limit%", String.valueOf(maxLimit));

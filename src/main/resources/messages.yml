@@ -59,6 +59,12 @@ commands:
     success: "&a&lTPA &8» &fHas aceptado la solicitud de teletransporte."
     here:
       get-location-error: "&c&lERROR &8» &fNo se ha podido obtener la ubicación del destino."
+  home-limit:
+    invalid-number: "&c&lERROR &8» &fEl número debe ser un número entero mayor a 0."
+    add: "&a&lHOMES &8» &fHas añadido &a%amount% &fhomes extra a &a%player%&f."
+    remove: "&a&lHOMES &8» &fHas eliminado &a%amount% &fhomes extra a &a%player%&f."
+    set: "&a&lHOMES &8» &fHas establecido a &a%amount% &fel número de homes extra de &a%player%&f."
+    success-target: "&a&lHOMES &8» &fTu número de homes extra ha pasado de &c%old-amount% &fa &a%new-amount%&f &7(este número no tiene en cuenta los homes extra de rangos de pago)&f."
 
 notifications:
   countdown:

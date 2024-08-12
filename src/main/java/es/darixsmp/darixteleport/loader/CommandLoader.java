@@ -52,6 +52,8 @@ public class CommandLoader {
     private TPAcceptCommand tpaAcceptCommand;
     @Inject
     private HomesCommand homesCommand;
+    @Inject
+    private HomeLimitCommand homeLimitCommand;
 
     public void load() {
         setHomeCommand.registerCommand(plugin);
@@ -71,5 +73,6 @@ public class CommandLoader {
         tpaHereCommand.registerCommand(plugin);
         tpaAcceptCommand.registerCommand(plugin);
         homesCommand.registerCommand(plugin);
+        homeLimitCommand.registerCommand(plugin);
     }
 }

@@ -4,7 +4,6 @@ import com.google.inject.Inject;
 import com.google.inject.name.Named;
 import es.darixsmp.darixteleport.DarixTeleport;
 import es.darixsmp.darixteleport.command.DefaultCommand;
-import es.darixsmp.darixteleportapi.service.Destination;
 import es.darixsmp.darixteleportapi.user.User;
 import es.darixsmp.darixteleportapi.user.UserService;
 import net.smoothplugins.smoothbase.configuration.Configuration;
