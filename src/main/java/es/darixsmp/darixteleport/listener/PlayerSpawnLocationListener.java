@@ -29,6 +29,10 @@ public class PlayerSpawnLocationListener implements Listener {
 
         TeleportLocation teleportLocation = pendingTeleport.getTarget();
         if (teleportLocation.getServer().equals(DarixTeleport.CURRENT_SERVER)) {
+            Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
+               pendingTeleportService.delete(player.getUniqueId());
+            });
+
             event.setSpawnLocation(teleportLocation.toLocation());
 
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
