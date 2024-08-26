@@ -20,6 +20,7 @@ import org.bukkit.entity.Player;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 public class TPAHereCommand extends DefaultCommand {
 
@@ -114,7 +115,9 @@ public class TPAHereCommand extends DefaultCommand {
     @Override
     public List<String> tabComplete(CommandSender sender, String[] args) {
         if (args.length == 1) {
-            return userService.getAllConnectedUsernames();
+            return userService.getAllConnectedUsernames().stream()
+                    .filter(username -> username.toLowerCase(Locale.ROOT).startsWith(args[0].toLowerCase(Locale.ROOT)))
+                    .toList();
         }
 
         return null;
