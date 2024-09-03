@@ -47,7 +47,7 @@ public class DefaultTeleportService implements TeleportService {
         }
 
         if (teleportLocation.getServer().equals(DarixTeleport.CURRENT_SERVER)) {
-            player.teleportAsync(teleportLocation.toLocation());
+            player.teleportAsync(teleportLocation.toLocation().orElseThrow());
             return;
         }
 

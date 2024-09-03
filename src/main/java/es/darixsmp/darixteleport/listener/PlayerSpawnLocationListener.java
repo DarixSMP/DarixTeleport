@@ -33,15 +33,15 @@ public class PlayerSpawnLocationListener implements Listener {
                pendingTeleportService.delete(player.getUniqueId());
             });
 
-            event.setSpawnLocation(teleportLocation.toLocation());
+            event.setSpawnLocation(teleportLocation.toLocation().orElseThrow());
 
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 try {
-                    if (player.getLocation().distance(teleportLocation.toLocation()) < 5.0) return;
+                    if (player.getLocation().distance(teleportLocation.toLocation().orElseThrow()) < 5.0) return;
 
-                    player.teleport(teleportLocation.toLocation());
+                    player.teleport(teleportLocation.toLocation().orElseThrow());
                 } catch (IllegalArgumentException ignored) {
-                    player.teleport(teleportLocation.toLocation());
+                    player.teleport(teleportLocation.toLocation().orElseThrow());
                 }
             }, 5L);
         } else {
