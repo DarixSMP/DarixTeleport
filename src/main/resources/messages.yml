@@ -1,88 +1,104 @@
 global:
-  not-a-player: "&c&lERROR &8» &fDebes ser un jugador para hacer eso."
-  no-permission: "&c&lERROR &8» &fNo tienes permiso."
-  wrong-usage: "&c&lERROR &8» &fUso: &7%usage%&f."
-  countdown-cancelled: "&c&lERROR &8» &fTe has movido, el teletransporte ha sido cancelado."
-  user-not-found: "&c&lERROR &8» &fNo se ha encontrado al jugador &c%player%&f."
-  self: "&c&lERROR &8» &fNo puedes hacer eso contigo mismo."
+  not-a-player: '&c&lERROR &8» &fDebes ser un jugador para hacer eso.'
+  no-permission: '&c&lERROR &8» &fNo tienes permiso.'
+  wrong-usage: '&c&lERROR &8» &fUso: &7%usage%&f.'
+  countdown-cancelled: '&c&lERROR &8» &fTe has movido, el teletransporte ha sido cancelado.'
+  user-not-found: '&c&lERROR &8» &fNo se ha encontrado al jugador &c%player%&f.'
+  self: '&c&lERROR &8» &fNo puedes hacer eso contigo mismo.'
 
 commands:
   sethome:
-    invalid-name: "&c&lERROR &8» &fEl nombre del home solo puede tener letras y números."
-    limit: "&c&lERROR &8» &fHas alcanzado el límite de homes &7(%limit%)&f."
-    success: "&a&lHOMES &8» &fHas establecido un nuevo home llamado &a%home%&f."
+    invalid-name: '&c&lERROR &8» &fEl nombre del home solo puede tener letras o números.'
+    limit: '&c&lERROR &8» &fHas alcanzado el límite de homes &7(%limit%)&f.'
+    success: '&a&lHOMES &8» &fHas establecido un nuevo home llamado &a%home%&f.'
   home:
-    not-found: "&c&lERROR &8» &fNo tienes un home llamado &c%home%&f."
-    success: "&a&lHOMES &8» &fTeletransportado a tu home &a%home%&f."
+    not-found: '&c&lERROR &8» &fNo tienes un home llamado &c%home%&f.'
+    success: '&a&lHOMES &8» &fTeletransportado a tu home &a%home%&f.'
   delhome:
-    success: "&a&lHOMES &8» &fHas eliminado tu home &a%home%&f."
+    success: '&a&lHOMES &8» &fHas eliminado tu home &a%home%&f.'
   phome:
-    not-found: "&c&lERROR &8» &fNo se ha encontrado el home &c%home%&f."
-    success: "&a&lHOMES &8» &fTeletransportado al home de &a%player% &fllamado &a%home%&f."
+    not-found: '&c&lERROR &8» &fNo se ha encontrado el home &c%home%&f.'
+    success: '&a&lHOMES &8» &fTeletransportado al home de &a%player% &fllamado &a%home%&f.'
   homes:
-    no-homes: "&c&lERROR &8» &fNo tienes homes establecidos."
-    header: "&a&lHOMES &8» &fLista de homes:"
-    format: "<gray>- <white>%home% <gray>(<click:run_command:/home %home%><green><b><underlined>IR</click><reset><gray>)"
+    no-homes: '&c&lERROR &8» &fNo tienes homes establecidos.'
+    header: '&a&lHOMES &8» &fLista de homes:'
+    format: <gray>- <white>%home% <gray>(<click:run_command:/home %home%><green><b><underlined>IR</click><reset><gray>)
   setwarp:
-    success: "&a&lWARPS &8» &fHas establecido un nuevo warp llamado &a%warp%&f."
+    success: '&a&lWARPS &8» &fHas establecido un nuevo warp llamado &a%warp%&f.'
   delwarp:
-    not-found: "&c&lERROR &8» &fNo se ha encontrado el warp &c%warp%&f."
-    success: "&a&lWARPS &8» &fHas eliminado el warp &a%warp% &fen el server &a%server%&f."
+    not-found: '&c&lERROR &8» &fNo se ha encontrado el warp &c%warp%&f.'
+    success: '&a&lWARPS &8» &fHas eliminado el warp &a%warp% &fen el server &a%server%&f.'
   warp:
-    not-found: "&c&lERROR &8» &fNo se ha encontrado el warp &c%warp%&f."
-    success: "&a&lWARPS &8» &fTeletransportado al warp &a%warp%&f."
+    not-found: '&c&lERROR &8» &fNo se ha encontrado el warp &c%warp%&f.'
+    success: '&a&lWARPS &8» &fTeletransportado al warp &a%warp%&f.'
   spawn:
-    not-found: "&c&lERROR &8» &fNo se ha encontrado el spawn."
-    success: "&a&lSPAWN &8» &fTeletransportado al spawn."
+    not-found: '&c&lERROR &8» &fNo se ha encontrado el spawn.'
+    success: '&a&lSPAWN &8» &fTeletransportado al spawn.'
   back:
-    success: "&a&lBACK &8» &fTeletransportado a tu última ubicación."
+    success: '&a&lBACK &8» &fTeletransportado a tu última ubicación.'
   tpo:
-    success: "&a&lTP &8» &fTeletransportado a la última ubicación de &a%player%&f."
+    success: '&a&lTP &8» &fTeletransportado a la última ubicación de &a%player%&f.'
   tphere:
-    success: "&a&lTP &8» &fTeletransportado a &a%target% &fa tu ubicación."
-    success-target: "&a&lTP &8» &fTeletransportado a la ubicación de &a%player%&f."
+    success: '&a&lTP &8» &fTeletransportado a &a%target% &fa tu ubicación.'
+    success-target: '&a&lTP &8» &fTeletransportado a la ubicación de &a%player%&f.'
   tp:
     coords:
-      invalid-coords: "&c&lERROR &8» &fLas coordenadas son inválidas."
-      success: "&a&lTP &8» &fTeletransportado a &a%coords%&f."
+      invalid-coords: '&c&lERROR &8» &fLas coordenadas son inválidas.'
+      success: '&a&lTP &8» &fTeletransportado a &a%coords%&f.'
     player:
-      success: "&a&lTP &8» &fTeletransportado a &a%player%&f."
+      success: '&a&lTP &8» &fTeletransportado a &a%player%&f.'
   tpa:
-    success: "&a&lTPA &8» &fHas enviado una solicitud de teletransporte a &a%target%&f."
-    success-target: "<yellow><b>TPA<reset> <dark_gray>» <white>Has recibido una solicitud de teletransporte de <green>%player%<white>, para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset>"
-    accepted: "&a&lTPA &8» &fLa solicitud de teletransporte a &a%target% &fha sido aceptada."
-    teleporting: "&a&lTPA &8» &fTeletransportando a &a%target%&f."
+    success: <green><b>TPA<reset> <dark_gray>» <white>Has enviado una solicitud de
+      teletransporte a <green>%target%<white>.<reset><newline><newline><red>¡Cuidado!
+      Esta petición de teletransporte podría ser una trampa.
+    success-target: <green><b>TPA<reset> <dark_gray>» <white>Has recibido una solicitud
+      de teletransporte de <green>%player%<white>, para aceptarla escribe <green>/tpaccept
+      <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset><newline><newline><red>¡Cuidado!
+      Esta petición de teletransporte podría ser una trampa.
+    accepted: '&a&lTPA &8» &fLa solicitud de teletransporte a &a%target% &fha sido
+      aceptada.'
+    teleporting: '&a&lTPA &8» &fTeletransportando a &a%target%&f.'
   tpahere:
-    success: "&a&lTPA &8» &fHas enviado una solicitud de teletransporte a tu ubicación a &a%target%&f."
-    success-target: "<yellow><b>TPA<reset> <dark_gray>» <white>Has recibido una solicitud de teletransporte a <red><b>SU</b> <white>ubicación de <green>%player%<white>, para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset>"
+    success: '&a&lTPA &8» &fHas enviado una solicitud de teletransporte a tu ubicación
+      a &a%target%&f.'
+    success-target: <yellow><b>TPA<reset> <dark_gray>» <white>Has recibido una solicitud
+      de teletransporte a <red><b>SU</b> <white>ubicación de <green>%player%<white>,
+      para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept
+      %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset><newline><newline><red>Esta
+      petición de teletransporte podría ser una trampa.
   tpaccept:
-    no-request: "&c&lERROR &8» &fNo tienes ninguna solicitud de teletransporte pendiente."
-    success: "&a&lTPA &8» &fHas aceptado la solicitud de teletransporte."
+    no-request: '&c&lERROR &8» &fNo tienes ninguna solicitud de teletransporte pendiente.'
+    success: '&a&lTPA &8» &fHas aceptado la solicitud de teletransporte.'
     here:
-      get-location-error: "&c&lERROR &8» &fNo se ha podido obtener la ubicación del destino."
+      get-location-error: '&c&lERROR &8» &fNo se ha podido obtener la ubicación del
+        destino.'
   home-limit:
-    invalid-number: "&c&lERROR &8» &fEl número debe ser un número entero mayor a 0."
-    add: "&a&lHOMES &8» &fHas añadido &a%amount% &fhomes extra a &a%player%&f."
-    remove: "&a&lHOMES &8» &fHas eliminado &a%amount% &fhomes extra a &a%player%&f."
-    set: "&a&lHOMES &8» &fHas establecido a &a%amount% &fel número de homes extra de &a%player%&f."
-    success-target: "&a&lHOMES &8» &fTu número de homes extra ha pasado de &c%old-amount% &fa &a%new-amount%&f &7(este número no tiene en cuenta los homes extra de rangos de pago)&f."
+    invalid-number: '&c&lERROR &8» &fEl número debe ser un número entero mayor a 0.'
+    add: '&a&lHOMES &8» &fHas añadido &a%amount% &fhomes extra a &a%player%&f.'
+    remove: '&a&lHOMES &8» &fHas eliminado &a%amount% &fhomes extra a &a%player%&f.'
+    set: '&a&lHOMES &8» &fHas establecido a &a%amount% &fel número de homes extra
+      de &a%player%&f.'
+    success-target: '&a&lHOMES &8» &fTu número de homes extra ha pasado de &c%old-amount%
+      &fa &a%new-amount%&f &7(este número no tiene en cuenta los homes extra de rangos
+      de pago)&f.'
 
 notifications:
   countdown:
     chat:
       enabled: true
       content:
-        - "&a&lTP &8» &fEl teletransporte iniciará en &d%time%&f segundos, no te muevas."
+        - '&a&lTP &8» &fEl teletransporte iniciará en &d%time%&f segundos, no te muevas.'
     actionbar:
       enabled: true
-      content: "&a&lTP &8» &fEl teletransporte iniciará en &d%time%&f segundos, no te muevas."
+      content: '&a&lTP &8» &fEl teletransporte iniciará en &d%time%&f segundos, no
+        te muevas.'
     title:
       enabled: false
-      title: "&cTitle"
-      subtitle: "&dSubtitle"
+      title: '&cTitle'
+      subtitle: '&dSubtitle'
       fadeIn: 0.5
       stay: 2
       fadeOut: 0.5
     sound:
       enabled: false
-      content: "ENTITY_PUFFER_FISH_BLOW_UP"
+      content: ENTITY_PUFFER_FISH_BLOW_UP
