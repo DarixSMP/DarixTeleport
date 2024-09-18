@@ -68,6 +68,11 @@ public class SetHomeCommand extends DefaultCommand {
     public void execute(CommandSender sender, String[] args) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
             String homeName = args.length == 0 ? "casa" : args[0];
+            if (!homeName.matches("[a-zA-Z0-9]+")) {
+                sender.sendMessage(messages.getComponent("commands.sethome.invalid-name"));
+                return;
+            }
+
             Player player = (Player) sender;
 
             User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();

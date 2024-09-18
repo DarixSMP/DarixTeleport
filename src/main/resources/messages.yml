@@ -8,6 +8,7 @@ global:
 
 commands:
   sethome:
+    invalid-name: "&c&lERROR &8» &fEl nombre del home solo puede tener letras y números."
     limit: "&c&lERROR &8» &fHas alcanzado el límite de homes &7(%limit%)&f."
     success: "&a&lHOMES &8» &fHas establecido un nuevo home llamado &a%home%&f."
   home:
