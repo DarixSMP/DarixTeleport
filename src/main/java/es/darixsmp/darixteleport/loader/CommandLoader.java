@@ -8,6 +8,7 @@ import es.darixsmp.darixteleport.command.spawn.SpawnCommand;
 import es.darixsmp.darixteleport.command.tp.TPCommand;
 import es.darixsmp.darixteleport.command.tp.TPHereCommand;
 import es.darixsmp.darixteleport.command.tp.TPOCommand;
+import es.darixsmp.darixteleport.command.tpa.TPACancelCommand;
 import es.darixsmp.darixteleport.command.tpa.TPACommand;
 import es.darixsmp.darixteleport.command.tpa.TPAHereCommand;
 import es.darixsmp.darixteleport.command.tpa.TPAcceptCommand;
@@ -51,6 +52,8 @@ public class CommandLoader {
     @Inject
     private TPAcceptCommand tpaAcceptCommand;
     @Inject
+    private TPACancelCommand tpaCancelCommand;
+    @Inject
     private HomesCommand homesCommand;
     @Inject
     private HomeLimitCommand homeLimitCommand;
@@ -72,6 +75,7 @@ public class CommandLoader {
         tpaCommand.registerCommand(plugin);
         tpaHereCommand.registerCommand(plugin);
         tpaAcceptCommand.registerCommand(plugin);
+        tpaCancelCommand.registerCommand(plugin);
         homesCommand.registerCommand(plugin);
         homeLimitCommand.registerCommand(plugin);
     }

@@ -8,7 +8,12 @@ import es.darixsmp.darixteleportapi.request.RequestService;
 import net.smoothplugins.smoothbase.configuration.Configuration;
 import net.smoothplugins.smoothbase.serializer.Serializer;
 import net.smoothplugins.smoothbase.storage.RedisStorage;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.params.ScanParams;
+import redis.clients.jedis.resps.ScanResult;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -35,5 +40,13 @@ public class DefaultRequestService implements RequestService {
     @Override
     public void delete(UUID sender, UUID receiver) {
         redisStorage.delete(sender.toString() + receiver.toString());
+    }
+
+    @Override
+    public List<Request> getRequestsOfSender(UUID uuid) {
+        return redisStorage.getAllValues().stream()
+                .map(jsonRequest -> serializer.deserialize(jsonRequest, Request.class))
+                .filter(request -> request.getSender().equals(uuid))
+                .toList();
     }
 }

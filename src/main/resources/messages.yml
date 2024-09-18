@@ -48,9 +48,9 @@ commands:
     player:
       success: '&a&lTP &8» &fTeletransportado a &a%player%&f.'
   tpa:
-    success: <green><b>TPA<reset> <dark_gray>» <white>Has enviado una solicitud de
-      teletransporte a <green>%target%<white>.<reset><newline><newline><red>¡Cuidado!
-      Esta petición de teletransporte podría ser una trampa.
+    success: '<green><b>TPA<reset> <dark_gray>» <white>Has enviado una solicitud de
+      teletransporte a <green>%target%<white>. Para cancelarla, usa: <red>/tpacancel <white>o haz <red><b><click:run_command:/tpacancel>CLIC AQUÍ</click></b><white>. <reset><newline><newline><red>¡Cuidado!
+      Esta petición de teletransporte podría ser una trampa.'
     success-target: <green><b>TPA<reset> <dark_gray>» <white>Has recibido una solicitud
       de teletransporte de <green>%player%<white>, para aceptarla escribe <green>/tpaccept
       <white>o haz <green><b><click:run_command:/tpaccept %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset><newline><newline><red>¡Cuidado!
@@ -59,19 +59,23 @@ commands:
       aceptada.'
     teleporting: '&a&lTPA &8» &fTeletransportando a &a%target%&f.'
   tpahere:
-    success: '&a&lTPA &8» &fHas enviado una solicitud de teletransporte a tu ubicación
-      a &a%target%&f.'
+    success: '<green><b>TPA<reset> <dark_gray>» <white>Has enviado una solicitud de teletransporte a tu ubicación
+      a <green>%target%<white>. Para cancelarla, usa: <red>/tpacancel <white>o haz <red><b><click:run_command:/tpacancel>CLIC AQUÍ</click></b><white>. <reset><newline><newline><red>¡Cuidado!
+      Esta petición de teletransporte podría ser una trampa.'
     success-target: <yellow><b>TPA<reset> <dark_gray>» <white>Has recibido una solicitud
       de teletransporte a <red><b>SU</b> <white>ubicación de <green>%player%<white>,
       para aceptarla escribe <green>/tpaccept <white>o haz <green><b><click:run_command:/tpaccept
       %sender-uuid%>CLIC AQUÍ</click></b><white>.<reset><newline><newline><red>Esta
       petición de teletransporte podría ser una trampa.
   tpaccept:
-    no-request: '&c&lERROR &8» &fNo tienes ninguna solicitud de teletransporte pendiente.'
+    no-request: '&c&lERROR &8» &fLa solicitud de teletransporte ha expirado o ha sido cancelada.'
     success: '&a&lTPA &8» &fHas aceptado la solicitud de teletransporte.'
     here:
       get-location-error: '&c&lERROR &8» &fNo se ha podido obtener la ubicación del
         destino.'
+  tpacancel:
+    no-requests: '&c&lERROR &8» &fNo tienes ninguna solicitud de teletransporte pendiente.'
+    success: '&a&lTPA &8» &fHas cancelado todas las solicitudes de teletransporte pendientes.'
   home-limit:
     invalid-number: '&c&lERROR &8» &fEl número debe ser un número entero mayor a 0.'
     add: '&a&lHOMES &8» &fHas añadido &a%amount% &fhomes extra a &a%player%&f.'
