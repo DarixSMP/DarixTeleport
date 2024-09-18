@@ -95,7 +95,12 @@ public class TPAcceptCommand extends DefaultCommand {
             if (args.length == 0) {
                 senderUUID = user.getLastTPARequestPlayer();
             } else {
-                senderUUID = UUID.fromString(args[0]);
+                try {
+                    senderUUID = UUID.fromString(args[0]);
+                } catch (IllegalArgumentException exception) {
+                    sender.sendMessage(getUsageComponent());
+                    return;
+                }
             }
 
             Request request = requestService.get(senderUUID, player.getUniqueId()).orElse(null);
