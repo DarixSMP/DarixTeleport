@@ -46,7 +46,7 @@ public class DefaultCountdownService implements CountdownService {
             }
 
             Location currentLocation = player.getLocation();
-            if (currentLocation.distance(originalLocation) > maxMovement) {
+            if (!currentLocation.getWorld().getUID().equals(originalLocation.getWorld().getUID()) || currentLocation.distance(originalLocation) > maxMovement) {
                 player.sendMessage(messages.getComponent("global.countdown-cancelled"));
                 return;
             }
