@@ -6,6 +6,7 @@ import es.darixsmp.darixteleport.listener.PlayerJoinListener;
 import es.darixsmp.darixteleport.listener.PlayerQuitListener;
 import es.darixsmp.darixteleport.listener.PlayerRespawnListener;
 import es.darixsmp.darixteleport.listener.PlayerSpawnLocationListener;
+import es.virtualhit.virtualmenu.VirtualMenu;
 import org.bukkit.Bukkit;
 
 public class ListenerLoader {
@@ -26,5 +27,7 @@ public class ListenerLoader {
         Bukkit.getPluginManager().registerEvents(playerJoinListener, plugin);
         Bukkit.getPluginManager().registerEvents(playerQuitListener, plugin);
         Bukkit.getPluginManager().registerEvents(playerRespawnListener, plugin);
+
+        VirtualMenu.registerListeners(plugin);
     }
 }
