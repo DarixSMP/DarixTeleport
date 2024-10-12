@@ -5,6 +5,8 @@ global:
   countdown-cancelled: '&c&lERROR &8» &fTe has movido, el teletransporte ha sido cancelado.'
   user-not-found: '&c&lERROR &8» &fNo se ha encontrado al jugador &c%player%&f.'
   self: '&c&lERROR &8» &fNo puedes hacer eso contigo mismo.'
+  min-previous-page: '&c&lERROR &8» &fYa estás en la primera página.'
+  max-next-page: '&c&lERROR &8» &fYa estás en la última página.'
 
 commands:
   sethome:
@@ -12,6 +14,7 @@ commands:
     limit: '&c&lERROR &8» &fHas alcanzado el límite de homes &7(%limit%)&f.'
     success: '&a&lHOMES &8» &fHas establecido un nuevo home llamado &a%home%&f.'
   home:
+    no-homes: '&c&lERROR &8» &fNo tienes ningún home.'
     not-found: '&c&lERROR &8» &fNo tienes un home llamado &c%home%&f.'
     success: '&a&lHOMES &8» &fTeletransportado a tu home &a%home%&f.'
   delhome:
@@ -19,10 +22,6 @@ commands:
   phome:
     not-found: '&c&lERROR &8» &fNo se ha encontrado el home &c%home%&f.'
     success: '&a&lHOMES &8» &fTeletransportado al home de &a%player% &fllamado &a%home%&f.'
-  homes:
-    no-homes: '&c&lERROR &8» &fNo tienes homes establecidos.'
-    header: '&a&lHOMES &8» &fLista de homes:'
-    format: <gray>- <white>%home% <gray>(<click:run_command:/home %home%><green><b><underlined>IR</click><reset><gray>)
   setwarp:
     success: '&a&lWARPS &8» &fHas establecido un nuevo warp llamado &a%warp%&f.'
   delwarp:

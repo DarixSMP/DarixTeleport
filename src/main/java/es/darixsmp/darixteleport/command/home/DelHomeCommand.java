@@ -1,29 +1,25 @@
 package es.darixsmp.darixteleport.command.home;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import es.darixsmp.darixteleport.DarixTeleport;
 import es.darixsmp.darixteleport.command.DefaultCommand;
-import es.darixsmp.darixteleportapi.service.Destination;
+import es.darixsmp.darixteleport.utils.HomeUtils;
 import es.darixsmp.darixteleportapi.user.User;
 import es.darixsmp.darixteleportapi.user.UserService;
-import net.smoothplugins.smoothbase.configuration.Configuration;
 import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 
 public class DelHomeCommand extends DefaultCommand {
 
     @Inject
     private UserService userService;
-    @Inject @Named("messages")
-    private Configuration messages;
     @Inject
     private DarixTeleport plugin;
+    @Inject
+    private HomeUtils homeUtils;
 
     @Override
     public String getName() {
@@ -63,15 +59,7 @@ public class DelHomeCommand extends DefaultCommand {
     @Override
     public void execute(CommandSender sender, String[] args) {
         Bukkit.getScheduler().runTaskAsynchronously(plugin, () -> {
-            Player player = (Player) sender;
-
-            User user = userService.getUserByUUID(player.getUniqueId()).orElseThrow();
-            user.removeHome(args[0]);
-            userService.update(user, Destination.CACHE_IF_PRESENT);
-
-            HashMap<String, String> placeholders = new HashMap<>();
-            placeholders.put("%home%", args[0].toLowerCase(Locale.ROOT));
-            player.sendMessage(messages.getComponent("commands.delhome.success", placeholders));
+            homeUtils.handleRemoveHome((Player) sender, args[0]);
         });
     }
 

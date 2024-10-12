@@ -24,6 +24,8 @@ public final class DarixTeleport extends JavaPlugin {
         // Plugin startup logic
         Configuration config = new Configuration(this, "config");
         Configuration messages = new Configuration(this, "messages");
+        Configuration homesMenu = new Configuration(this, "menu/homes");
+        Configuration homeRemoveConfirmationMenu = new Configuration(this, "menu/home-remove-confirmation");
 
         CURRENT_SERVER = config.getString("server");
 
@@ -39,7 +41,7 @@ public final class DarixTeleport extends JavaPlugin {
 
         injector = Guice.createInjector(
                 new MainModule(this, getSmoothUsersAPI()),
-                new ConfigurationModule(config, messages),
+                new ConfigurationModule(config, messages, homesMenu, homeRemoveConfirmationMenu),
                 new ConnectionModule(mongoConnection, redisConnection),
                 new StorageModule(),
                 new SerializerModule(),

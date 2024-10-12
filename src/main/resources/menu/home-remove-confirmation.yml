@@ -1,0 +1,31 @@
+title: "&8Confirmar eliminación"
+background: "AIR"
+size: 27
+type: CHEST
+
+static-items:
+  cancel:
+    material: RED_STAINED_GLASS_PANE
+    slot: 11
+    name: "&cCancelar"
+    lore:
+      - " "
+      - "&fHaz clic para cancelar la eliminación."
+      - " "
+      - '&a▶ ¡Clic para cancelar!'
+    action: GO_BACK
+  home:
+    material: LIME_BED
+    name: "&aHome: &f%home%"
+    slot: 13
+    action: NONE
+  confirm:
+    material: LIME_STAINED_GLASS_PANE
+    slot: 15
+    name: "&aConfirmar"
+    lore:
+      - " "
+      - "&fHaz clic para confirmar la eliminación."
+      - " "
+      - '&a▶ ¡Clic para confirmar!'
+    action: REMOVE_HOME

@@ -1,0 +1,89 @@
+title: "&8Homes"
+background: "AIR"
+size: 54
+type: CHEST
+
+static-items:
+  explanation:
+    material: KNOWLEDGE_BOOK
+    slot: 4
+    name: "&7¿Qué son los homes?"
+    lore:
+      - " "
+      - "&fUn home es una ubicación guardada a la que"
+      - "&fpuedes teletransportarte en cualquier momento."
+      - " "
+      - "&7Este menú te permite gestionar tus"
+      - "&7homes de una forma sencilla y rápida."
+      - " "
+    action: NONE
+  previous-page:
+    material: GRAY_DYE
+    slot: 48
+    name: "&aPágina anterior"
+    action: PREVIOUS_PAGE
+  close:
+    material: BARRIER
+    slot: 49
+    name: "&cCerrar"
+    action: CLOSE
+  next-page:
+    material: GRAY_DYE
+    slot: 50
+    name: "&aSiguiente página"
+    action: NEXT_PAGE
+
+dynamic-items:
+  bed:
+    slots:
+      - 19
+      - 20
+      - 21
+      - 22
+      - 23
+      - 24
+      - 25
+    set:
+      material: LIME_BED
+      name: "&aHome: &f%home%"
+      lore:
+        - " "
+        - "&fHaz clic para teletransportarte a este home."
+        - " "
+        - '&a▶ ¡Clic para ir al home!'
+    unset:
+      material: GRAY_BED
+      name: "&7Home no establecido"
+      lore:
+        - " "
+        - "&fHaz clic para establecer este home."
+        - " "
+        - '&a▶ ¡Clic para establecer el home!'
+    not-available:
+      material: RED_BED
+      name: "&cHome no disponible"
+      lore:
+        - " "
+        - "&fNo tienes más homes disponibles."
+        - " "
+        - "&7Puedes conseguir más homes comprando un rango"
+        - "&7en la tienda online del servidor (/tienda)."
+        - " "
+  remove:
+    material: RED_DYE
+    name: "&cHome: &f%home%"
+    lore:
+      - " "
+      - "&fHaz clic para eliminar este"
+      - "&fhome de tu lista."
+      - " "
+      - '&c▶ ¡Clic para eliminar el home!'
+    slots:
+      - 28
+      - 29
+      - 30
+      - 31
+      - 32
+      - 33
+      - 34
+
